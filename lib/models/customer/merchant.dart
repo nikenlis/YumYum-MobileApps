@@ -5,6 +5,7 @@ class Merchant with ChangeNotifier{
   final String? username;
   final String? name;
   final String? imageUrl;
+  final String? description;
   final double? password;
   final int? isOpen;
   final String? deviceId;
@@ -15,6 +16,7 @@ class Merchant with ChangeNotifier{
     @required this.username, 
     @required this.name, 
     @required this.imageUrl, 
+    @required this.description,
     @required this.password, 
     this.isOpen = 1, 
     @required this.deviceId, 

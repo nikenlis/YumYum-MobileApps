@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 
 class HomeRecomendationItem extends StatelessWidget {
-  final String imgUrl;
+  final String imageUrl;
   final String menu;
   final String merchant;
   final String price;
@@ -11,14 +11,15 @@ class HomeRecomendationItem extends StatelessWidget {
       {required this.menu,
       required this.merchant,
       required this.price,
-      required this.imgUrl,
+      required this.imageUrl,
       this.onPressed,
       super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () { 
+      },
       child: Container(
         height: 200,
         width: MediaQuery.of(context).size.width/2-30,
@@ -35,7 +36,7 @@ class HomeRecomendationItem extends StatelessWidget {
               height: 80,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(11),
-                image: DecorationImage(image: AssetImage(imgUrl), fit: BoxFit.cover,),
+                image: DecorationImage(image: AssetImage(imageUrl), fit: BoxFit.cover,),
               ),
             ),
             const SizedBox(
@@ -61,7 +62,7 @@ class HomeRecomendationItem extends StatelessWidget {
             Text(
               price,
               style: purpleTextStyle.copyWith(
-                fontSize: 10,
+                fontSize: 12,
                 fontWeight: medium,
               ),
               overflow: TextOverflow.ellipsis,

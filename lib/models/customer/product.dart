@@ -4,9 +4,9 @@ class Product {
   final int merchantId;
   final String name;
   final String imageUrl;
-  final String? description;
+  final String description;
   final int price;
-  final String? estimate;
+  final String estimate;
   int isActive;
 
 

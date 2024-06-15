@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_bottom_navigation_bar.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_home_page.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_detail_page.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_sign_in_page.dart';
 import 'package:yumyum_amicta/ui/pages/merchant/merchant_sign_in_page.dart';
 import 'package:yumyum_amicta/ui/pages/onboarding_page.dart';
@@ -35,6 +37,8 @@ class App extends StatelessWidget {
         '/customer-sign-in' :(context) => CustomerSignInPage(),
         '/customer-bottom-navbar' :(context) => CustomerBottomNavBar(),
         '/customer-home' :(context) => const CustomerHomePage(),
+        '/cutomer-merchant-overview':(context) => const CustomerMerchantOverviewPage(),
+        '/cutomer-merchant-detail':(context) => const CutomerMerchantDetailPage(),
         '/merchant-sign-in' :(context) => const MerchantSignInPage(),
       },
     );

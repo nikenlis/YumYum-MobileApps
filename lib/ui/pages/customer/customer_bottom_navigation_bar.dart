@@ -3,7 +3,7 @@ import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_home_page.dart';
-import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_page.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_order_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_profile_page.dart';
 
@@ -20,7 +20,7 @@ class _CustomerBottomNavBarState extends State<CustomerBottomNavBar> {
   CarouselController controller = CarouselController();
   final List<Widget> pages = [
     const CustomerHomePage(),
-    const CustomerMerchantPage(),
+    const CustomerMerchantOverviewPage(),
     const CustomerOrderPage(),
     const CustomerProfilePage()
   ];

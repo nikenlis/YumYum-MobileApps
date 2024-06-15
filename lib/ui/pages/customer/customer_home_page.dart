@@ -198,7 +198,7 @@ class CustomerHomePage extends StatelessWidget {
           ),
         ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
         GridView.builder(
           shrinkWrap: true,
@@ -209,7 +209,7 @@ class CustomerHomePage extends StatelessWidget {
               menu: loadedProducts[i].name,
               merchant: 'Warung Bu rini',
               price: 'Rp ${loadedProducts[i].price}',
-              imgUrl: loadedProducts[i].imageUrl),
+              imageUrl: loadedProducts[i].imageUrl),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.9,
