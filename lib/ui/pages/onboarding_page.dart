@@ -1,172 +1,200 @@
-import 'package:carousel_slider/carousel_controller.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
-import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 
+class OnboardingData {
+  final String title;
+  final String subtitle;
+  final String imagePath;
 
-class OnboardingPage extends StatefulWidget {
-  const OnboardingPage({super.key});
-
-  @override
-  State<OnboardingPage> createState() => _OnboardingPageState();
+  OnboardingData({
+    required this.title,
+    required this.subtitle,
+    required this.imagePath,
+  });
 }
 
-class _OnboardingPageState extends State<OnboardingPage> {
-  int currentIndex = 0;
-  CarouselController controller = CarouselController();
+class OnboardingController extends GetxController {
+  var currentIndex = 0.obs;
+  CarouselController carouselController = CarouselController();
 
-  List<String> titles = [
-    'All your favorites',
-    'Free delivery offers',
-    'Choose your food',
+  final List<OnboardingData> onboardingData = [
+    OnboardingData(
+      title: 'All your favorites',
+      subtitle:
+          'Order from the best local restaurants with easy, on-demand delivery.',
+      imagePath: 'assets/img_onboarding1.png',
+    ),
+    OnboardingData(
+      title: 'Free delivery offers',
+      subtitle:
+          'Free delivery for new customers via Apple Pay and others payment methods.',
+      imagePath: 'assets/img_onboarding2.png',
+    ),
+    OnboardingData(
+      title: 'Choose your food',
+      subtitle:
+          'Easily find your type of food craving and you’ll get delivery in wide range.',
+      imagePath: 'assets/img_onboarding3.png',
+    ),
   ];
 
-  List<String> subtitles = [
-    'Order from the best local restaurants with easy, on-demand delivery.',
-    'Free delivery for new customers\nvia Apple Pay and others payment methods.',
-    'Easily find your type of food craving and you’ll get delivery in wide range.',
-  ];
+  void updateIndex(int index) {
+    currentIndex.value = index;
+  }
+
+  void nextPage() {
+    carouselController.nextPage();
+  }
+
+  void goToSignIn() {
+    Get.offAllNamed('/customer-sign-in');
+  }
+}
+
+class IndicatorDot extends StatelessWidget {
+  final bool isActive;
+
+  const IndicatorDot({super.key, required this.isActive});
 
   @override
   Widget build(BuildContext context) {
+    return Container(
+      width: 12,
+      height: 12,
+      margin: const EdgeInsets.only(right: 8),
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: isActive ? purpleColor : greyColor,
+      ),
+    );
+  }
+}
+
+class CustomFilledButton extends StatelessWidget {
+  final String title;
+  final VoidCallback onPressed;
+  final double width;
+
+  const CustomFilledButton({
+    super.key,
+    required this.title,
+    required this.onPressed,
+    this.width = double.infinity,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: width,
+      child: ElevatedButton(
+        onPressed: onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: purpleColor,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        child: Text(
+          title,
+          style: TextStyle(color: whiteColor, fontSize: 16),
+        ),
+      ),
+    );
+  }
+}
+
+class OnboardingPage extends StatelessWidget {
+  final OnboardingController controller = Get.put(OnboardingController());
+
+  OnboardingPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CarouselSlider(
-              items: [
-                Image.asset(
-                  'assets/img_onboarding1.png',
+              items: controller.onboardingData.map((data) {
+                return Image.asset(
+                  data.imagePath,
                   height: 331,
-                ),
-                Image.asset(
-                  'assets/img_onboarding2.png',
-                  height: 331,
-                ),
-                Image.asset(
-                  'assets/img_onboarding3.png',
-                  height: 331,
-                ),
-              ],
+                  fit: BoxFit.cover,
+                );
+              }).toList(),
               options: CarouselOptions(
                 height: 331,
-                viewportFraction: 1, //biar satu gambar satu page
+                viewportFraction: 1,
                 enableInfiniteScroll: false,
                 onPageChanged: (index, reason) {
-                  setState(() {
-                    currentIndex = index;
-                  });
+                  controller.updateIndex(index);
                 },
               ),
-              carouselController: controller,
+              carouselController: controller.carouselController,
             ),
-            const SizedBox(
-              height: 80,
-            ),
+            SizedBox(height: size.height * 0.08),
             Container(
-              margin: const EdgeInsets.symmetric(
-                horizontal: 24,
-              ),
-              padding: const EdgeInsets.symmetric(
-                horizontal: 22,
-                vertical: 24,
+              margin: EdgeInsets.symmetric(horizontal: size.width * 0.06),
+              padding: EdgeInsets.symmetric(
+                horizontal: size.width * 0.055,
+                vertical: size.height * 0.03,
               ),
               decoration: BoxDecoration(
                 color: whiteColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    titles[currentIndex],
-                    style: blackTextStyle.copyWith(
-                      fontSize: 20,
-                      fontWeight: semiBold,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(
-                    height: 26,
-                  ),
-                  Text(
-                    subtitles[currentIndex],
-                    style: greyTextStyle.copyWith(
-                      fontSize: 16,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
+                  Obx(() => Text(
+                        controller.onboardingData[controller.currentIndex.value]
+                            .title,
+                        style: blackTextStyle,
+                        textAlign: TextAlign.center,
+                      )),
+                  SizedBox(height: size.height * 0.03),
+                  Obx(() => Text(
+                        controller.onboardingData[controller.currentIndex.value]
+                            .subtitle,
+                        style: greyTextStyle,
+                        textAlign: TextAlign.center,
+                      )),
                   SizedBox(
-                    height: currentIndex == 2 ? 38 : 50,
+                    height: controller.currentIndex.value == 2
+                        ? size.height * 0.038
+                        : size.height * 0.05,
                   ),
-                  currentIndex == 2
+                  Obx(() => controller.currentIndex.value == 2
                       ? Column(
                           children: [
                             CustomFilledButton(
                               title: 'Sign-in',
-                              onPressed: () {
-                                Navigator.pushNamedAndRemoveUntil(
-                                    context, '/customer-sign-in', (route) => false);
-                              },
+                              onPressed: controller.goToSignIn,
                             ),
-                            const SizedBox(
-                              height: 20,
-                            ),
+                            SizedBox(height: size.height * 0.02),
                           ],
                         )
                       : Row(
                           children: [
-                            Container(
-                              width: 12,
-                              height: 12,
-                              margin: const EdgeInsets.only(
-                                right: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: currentIndex == 0
-                                    ? purpleColor
-                                    : greyColor,
-                              ),
-                            ),
-                            Container(
-                              width: 12,
-                              height: 12,
-                              margin: const EdgeInsets.only(
-                                right: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: currentIndex == 1
-                                    ? purpleColor
-                                    : greyColor,
-                              ),
-                            ),
-                            Container(
-                              width: 12,
-                              height: 12,
-                              margin: const EdgeInsets.only(
-                                right: 10,
-                              ),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: currentIndex == 2
-                                    ? purpleColor
-                                    : greyColor,
-                              ),
-                            ),
+                            IndicatorDot(
+                                isActive: controller.currentIndex.value == 0),
+                            IndicatorDot(
+                                isActive: controller.currentIndex.value == 1),
+                            IndicatorDot(
+                                isActive: controller.currentIndex.value == 2),
                             const Spacer(),
                             CustomFilledButton(
                               title: 'Continue',
                               width: 150,
-                              onPressed: () {
-                                controller.nextPage();
-                              },
+                              onPressed: controller.nextPage,
                             ),
                           ],
-                        ),
+                        )),
                 ],
               ),
             ),

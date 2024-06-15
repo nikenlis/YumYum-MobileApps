@@ -7,6 +7,8 @@ class CustomFormField extends StatefulWidget {
   final TextEditingController? controller;
   final bool isShowTitle;
   final bool iconVisibility;
+  final ValueChanged<String>?
+      onChanged; // Menggunakan ValueChanged untuk onChanged
   final Function(String)? onFieldSubmitted;
 
   const CustomFormField({
@@ -16,6 +18,7 @@ class CustomFormField extends StatefulWidget {
     this.controller,
     this.isShowTitle = true,
     this.iconVisibility = false,
+    this.onChanged,
     this.onFieldSubmitted,
   });
 
@@ -49,8 +52,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
             height: 8,
           ),
         TextFormField(
-          //obscureText: widget.obsecureText,
-          obscureText:  _obsecureText,
+          obscureText: _obsecureText,
           controller: widget.controller,
           decoration: InputDecoration(
               hintText: !widget.isShowTitle ? widget.title : null,
@@ -61,14 +63,17 @@ class _CustomFormFieldState extends State<CustomFormField> {
               suffixIcon: widget.iconVisibility
                   ? IconButton(
                       onPressed: () {
-                        setState((){
+                        setState(() {
                           _obsecureText = !_obsecureText;
                         });
                       },
-                      icon: Icon(_obsecureText
-                          ? Icons.visibility_off
-                          : Icons.visibility, color: greyColor,))
+                      icon: Icon(
+                        _obsecureText ? Icons.visibility_off : Icons.visibility,
+                        color: greyColor,
+                      ),
+                    )
                   : null),
+          onChanged: widget.onChanged,
           onFieldSubmitted: widget.onFieldSubmitted,
         ),
       ],
