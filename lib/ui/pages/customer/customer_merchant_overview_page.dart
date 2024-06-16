@@ -11,24 +11,21 @@ class CustomerMerchantOverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120),
-        child: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {},
-          ),
-          flexibleSpace: Column(
-            children: [
-              SizedBox(height: 60,),
-              Text('Merchant', style: blackTextStyle.copyWith(fontSize: 20, fontWeight: semiBold,),),
-              SizedBox(height: 10,),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: buildSearchBar(context),
-              ),
-            ],
-          ),
+        preferredSize: const Size.fromHeight(100),
+      child: AppBar(
+        flexibleSpace: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text('Merchant',style: blackTextStyle.copyWith(
+            fontSize: 20,
+            fontWeight: semiBold,
+          ),),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: buildSearchBar(context)),
+          ],
         ),
+      ),
       ),
       body: ListView(
         shrinkWrap: true,
@@ -65,7 +62,7 @@ class CustomerMerchantOverviewPage extends StatelessWidget {
       margin: const EdgeInsets.only(top: 10),
       child: ListView.builder(
         shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(), 
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: loadedMerchant.length,
         itemBuilder: (context, index) {
           return CustomerMerchantItem(

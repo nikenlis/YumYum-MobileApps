@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 
+
 class CustomerMerchantItem extends StatelessWidget {
   final int id;
   final String name;
@@ -21,7 +22,7 @@ class CustomerMerchantItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamedAndRemoveUntil(context, '/cutomer-merchant-detail', (route) => false, arguments: id);
+         Navigator.pushNamed(context, '/cutomer-merchant-detail', arguments: id);
       },
       child: Container(
         height: 110,

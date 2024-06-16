@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/models/customer/product.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
@@ -13,19 +12,17 @@ class CutomerMerchantDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {},
-            ),
             actions: [
               CustomBadge(
+                value: "0",
                 child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamedAndRemoveUntil(context, '/customer-order', (route) => false);
+                    },
                     icon: const Icon(
                       Icons.shopping_cart_outlined,
-                      size: 24,
+                      size: 28,
                     )),
-                value: "0",
               ),
               const SizedBox(
                 width: 20,
@@ -33,11 +30,8 @@ class CutomerMerchantDetailPage extends StatelessWidget {
             ]),
         body: ListView(
           shrinkWrap: true,
-      physics: PageScrollPhysics(),
-          children: [
-            buildProfile(context),
-            buildMenu(context)
-          ],
+          physics: const PageScrollPhysics(),
+          children: [buildProfile(context), buildMenu(context)],
         ));
   }
 
@@ -71,7 +65,9 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                   maxLines: null,
                   overflow: TextOverflow.visible,
                 ),
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 Text(
                   'Jajanan, Sweet, Cepat Saji, Roti',
                   style: blackTextStyle.copyWith(
@@ -81,13 +77,16 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                   maxLines: null,
                   overflow: TextOverflow.visible,
                 ),
-                
-                const SizedBox(height: 10,),
-                Text('Online', style: isOpen
-                    ? greenTextStyle.copyWith(fontSize: 12, fontWeight: bold)
-                    : yellowTextStyle.copyWith(fontSize: 12, fontWeight: bold),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  'Online',
+                  style: isOpen
+                      ? greenTextStyle.copyWith(fontSize: 12, fontWeight: bold)
+                      : yellowTextStyle.copyWith(
+                          fontSize: 12, fontWeight: bold),
                 )
-                
               ],
             ),
           )
@@ -96,8 +95,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
     );
   }
 
-
-   Widget buildMenu(BuildContext context) {
+  Widget buildMenu(BuildContext context) {
     final List<Product> loadedProducts = List.generate(7, (index) {
       return Product(
           id: index,
@@ -119,7 +117,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 24),
           child: Text(
-            'Menu untuk mu',
+            'Pilihan menu untukmu',
             style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
           ),
         ),
@@ -132,6 +130,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           itemCount: 7,
           itemBuilder: (ctx, i) => CustomerMenuItem(
+              id: loadedProducts[i].id,
               menu: loadedProducts[i].name,
               description: loadedProducts[i].description,
               price: 'Rp ${loadedProducts[i].price}',

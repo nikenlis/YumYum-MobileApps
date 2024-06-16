@@ -18,8 +18,8 @@ class CustomBadge extends StatelessWidget {
       children: [
         child,
         Positioned(
-          right: 8,
-          top: 8,
+          right: 5,
+          top: 5,
           child: Container(
             padding: const EdgeInsets.all(2.0),
             decoration: BoxDecoration(
@@ -27,15 +27,17 @@ class CustomBadge extends StatelessWidget {
               color: purpleColor
             ),
             constraints: const BoxConstraints(
-              minWidth: 16,
-              minHeight: 16,
+              minWidth: 20,
+              minHeight: 20,
             ),
-            child: Text(
-              value,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 10,
-                color: Colors.black,
+            child: Center(
+              child: Text(
+                value,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 12,
+                  color: whiteColor,
+                ),
               ),
             ),
           ),

@@ -79,10 +79,10 @@ class CustomerHomePage extends StatelessWidget {
       child: Row(
         children: [
           Expanded(child: CustomSearchBar(controller: controller,)),
-          SizedBox(
+          const SizedBox(
             width: 12,
           ),
-          Icon(
+          const Icon(
             Icons.favorite_outline,
             size: 25,
           )

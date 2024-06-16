@@ -9,7 +9,7 @@ import 'package:yumyum_amicta/ui/pages/customer/customer_profile_page.dart';
 
 
 class CustomerBottomNavBar extends StatefulWidget {
-  CustomerBottomNavBar({super.key});
+  const CustomerBottomNavBar({super.key});
 
   @override
   State<CustomerBottomNavBar> createState() => _CustomerBottomNavBarState();
@@ -46,7 +46,7 @@ class _CustomerBottomNavBarState extends State<CustomerBottomNavBar> {
             NavigationDestination(
                 icon: const Icon(Icons.list_outlined), label: 'Order', selectedIcon: Icon(Icons.list_outlined, color: purpleColor)),
             NavigationDestination(
-                icon: const Icon(Icons.person_outline), label: 'Profile', selectedIcon: Icon(Icons.list_outlined, color: purpleColor)),
+                icon: const Icon(Icons.person_outline), label: 'Profile', selectedIcon: Icon(Icons.person_outline, color: purpleColor)),
           ]),
       body: pages[currentPageIndex],
     );

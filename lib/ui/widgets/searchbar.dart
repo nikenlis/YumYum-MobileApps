@@ -47,14 +47,19 @@ class CustomSearchBar extends StatefulWidget {
 
 class _CustomSearchBarState extends State<CustomSearchBar> {
   bool showClearIcon = false;
-   @override
+  late final VoidCallback _controllerListener;
+
+  @override
   void initState() {
     super.initState();
-    widget.controller!.addListener(() {
-      setState(() {
-        showClearIcon = widget.controller!.text.isNotEmpty;
-      });
-    });
+    _controllerListener = () {
+      if (mounted) {
+        setState(() {
+          showClearIcon = widget.controller!.text.isNotEmpty;
+        });
+      }
+    };
+    widget.controller!.addListener(_controllerListener);
   }
 
   @override

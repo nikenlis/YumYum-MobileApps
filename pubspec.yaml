@@ -17,8 +17,7 @@ dependencies:
   another_flushbar: ^1.12.30
   equatable: ^2.0.3
   http: ^1.0.0
-  flutter_bloc: ^8.1.5
-  bloc: ^8.1.4
+  flutter_slidable: ^3.0.0
 
 dev_dependencies:
   flutter_test:

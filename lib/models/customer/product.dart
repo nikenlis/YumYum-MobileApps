@@ -7,7 +7,7 @@ class Product {
   final String description;
   final int price;
   final String estimate;
-  int isActive;
+  bool isActive;
 
 
   Product({
@@ -19,6 +19,6 @@ class Product {
     required this.description,
     required this.price,
     required this.estimate,
-    this.isActive = 1,
+    this.isActive = true,
   });
 }

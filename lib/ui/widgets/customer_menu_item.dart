@@ -1,39 +1,49 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
+import 'package:yumyum_amicta/ui/widgets/circular_icon.dart';
+import 'package:yumyum_amicta/ui/widgets/customer_merchant_more_detail_menu.dart';
 
 class CustomerMenuItem extends StatelessWidget {
+  final int id;
   final String imageUrl;
   final String menu;
   final String description;
   final String price;
   final String estimate;
-  final VoidCallback? onPressed;
+  int isActive;
   bool isFavorite;
 
-  CustomerMenuItem(
-      {required this.menu,
-      required this.description,
-      required this.price,
-      required this.estimate,
-      required this.imageUrl,
-      this.onPressed,
-      this.isFavorite = false,
-      super.key});
+  CustomerMenuItem({
+    required this.id,
+    required this.menu,
+    required this.description,
+    required this.price,
+    required this.estimate,
+    required this.imageUrl,
+    this.isActive = 1,
+    this.isFavorite = false,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        showDialog(
+            context: context,
+            builder: (context) => CustomerMerchantMoreDetailMenu(id: id));
+      },
       child: Container(
         height: 300,
         width: MediaQuery.of(context).size.width / 2 - 30,
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-            color: whiteColor, borderRadius: BorderRadius.circular(11)),
+            color: isActive == 1 ? whiteColor : greyColor,
+            borderRadius: BorderRadius.circular(11)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            ///Image
             Container(
               width: MediaQuery.of(context).size.width / 2 - 60,
               height: 80,
@@ -48,6 +58,8 @@ class CustomerMenuItem extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
+
+            ///Keterangan
             Text(
               menu,
               style: blackTextStyle.copyWith(
@@ -79,55 +91,59 @@ class CustomerMenuItem extends StatelessWidget {
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
-                IconButton(
-                    onPressed: () {
-                      isFavorite = !isFavorite;
-                    },
-                    icon: isFavorite
-                        ? const Icon(Icons.favorite_outlined)
-                        : const Icon(Icons.favorite_border_outlined))
+                isActive == 1
+                    ? IconButton(
+                        onPressed: () {
+                          isFavorite = !isFavorite;
+                        },
+                        icon: Icon(
+                          isFavorite
+                              ? Icons.favorite_outlined
+                              : Icons.favorite_outlined,
+                          color: purpleColor,
+                        ),
+                      )
+                    : const SizedBox()
               ],
             ),
             const SizedBox(
               height: 1,
             ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Icon(Icons.timer_outlined, color: greyColor,),
-                    SizedBox(width: 3,),
-                    Text(estimate, style: greyTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),),
-                  ],
-                ),
-                CircleAvatar(
-                radius: 20,
-                backgroundColor: purpleColor,
-                child: Material(
-                  color: Colors.transparent,
-                  shape: const CircleBorder(),
-                  clipBehavior: Clip.hardEdge,
-                  child: InkWell(
-                    onTap: () { },
-                    splashColor: greyColor,
-                    child: Container(
-                      width: 40,
-                      height: 40,
-                      alignment: Alignment.center,
-                      child: Icon(
-                        Icons.add,
-                        color: whiteColor,
-                        size: 20,
+            isActive == 1
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.timer_outlined,
+                            color: greyColor,
+                          ),
+                          const SizedBox(
+                            width: 3,
+                          ),
+                          Text(
+                            estimate,
+                            style: greyTextStyle.copyWith(
+                                fontSize: 12, fontWeight: semiBold),
+                          ),
+                        ],
                       ),
+                      const CustomCircularIcon(icon: Icons.add)
+                    ],
+                  )
+                : Center(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 30),
+                      width: 80,
+                      height: 30,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(24),
+                          border: Border.all(color: blackColor)),
+                      child: const Center(child: Text('Tutup')),
                     ),
-                  ),
-                ),
-              ),
-              ],
-            )
+                  )
           ],
         ),
       ),
