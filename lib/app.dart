@@ -5,6 +5,7 @@ import 'package:yumyum_amicta/ui/pages/customer/customer_home_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_detail_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_order_page.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_order_success_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_sign_in_page.dart';
 import 'package:yumyum_amicta/ui/pages/merchant/merchant_sign_in_page.dart';
 import 'package:yumyum_amicta/ui/pages/onboarding_page.dart';
@@ -41,6 +42,7 @@ class App extends StatelessWidget {
         '/cutomer-merchant-overview':(context) => const CustomerMerchantOverviewPage(),
         '/cutomer-merchant-detail':(context) => const CutomerMerchantDetailPage(),
         '/customer-order' :(context) => const CustomerOrderPage(),
+        '/customer-order-success' : (context) => CustomerOrderSuccessPage(),
         '/merchant-sign-in' :(context) => const MerchantSignInPage(),
       },
     );

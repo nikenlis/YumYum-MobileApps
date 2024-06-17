@@ -20,8 +20,7 @@ class CustomerOrderPage extends StatelessWidget {
           buildTotalOrder(context),
         ],
       ),
-      floatingActionButton: SizedBox(
-          width: double.infinity, height: 48, child: buildBotton(context)),
+      floatingActionButton: buildBotton(context),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
@@ -94,19 +93,24 @@ class CustomerOrderPage extends StatelessWidget {
   }
 
   Widget buildBotton(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 30),
-      width: double.infinity,
-      height: 48,
-      decoration: BoxDecoration(
-        color: purpleColor,
-        borderRadius: BorderRadius.circular(56),
+    return GestureDetector(
+      onTap: (){
+        Navigator.pushNamedAndRemoveUntil(context, '/customer-order-success', (route) => false);
+      },
+      child: Container(
+        margin: const EdgeInsets.only(left: 30),
+        width: double.infinity,
+        height: 48,
+        decoration: BoxDecoration(
+          color: purpleColor,
+          borderRadius: BorderRadius.circular(56),
+        ),
+        child: Center(
+            child: Text(
+          'Pesan Sekarang',
+          style: whiteTextStyle.copyWith(fontSize: 15, fontWeight: semiBold),
+        )),
       ),
-      child: Center(
-          child: Text(
-        'Pesan Sekarang',
-        style: whiteTextStyle.copyWith(fontSize: 15, fontWeight: semiBold),
-      )),
     );
   }
 }
