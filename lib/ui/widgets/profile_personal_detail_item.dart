@@ -23,17 +23,15 @@ class ProfilePersonalDetailItem extends StatelessWidget {
   final IconData icon;
 
   ProfilePersonalDetailItem({
+    super.key,
     required this.title,
     required this.icon,
-    Key? key,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    final double itemWidth =
-        mediaQuery.size.width - 34; // Adjust based on padding/margin
-
+    final double itemWidth = mediaQuery.size.width - 34;
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.symmetric(horizontal: 17),

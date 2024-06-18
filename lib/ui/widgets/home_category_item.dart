@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 
 class HomeCategoryItemController extends GetxController {
-  // Contoh state
   var isClicked = false.obs;
 
   void toggleClicked() {
