@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_bottom_navigation_bar.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_home_page.dart';
-import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_detail_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_order_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_order_success_page.dart';
@@ -12,11 +13,19 @@ import 'package:yumyum_amicta/ui/pages/onboarding_page.dart';
 import 'package:yumyum_amicta/ui/pages/splash_page.dart';
 
 class App extends StatelessWidget {
+  
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: lightBackgroundColor,
@@ -24,27 +33,46 @@ class App extends StatelessWidget {
           backgroundColor: lightBackgroundColor,
           elevation: 0,
           centerTitle: true,
-          iconTheme: const IconThemeData(
-              //color: blackColor,
-              ),
+          iconTheme: const IconThemeData(),
           titleTextStyle: blackTextStyle.copyWith(
             fontSize: 20,
             fontWeight: semiBold,
           ),
         ),
       ),
-      routes: {
-        '/' : (context) => const SplashPage(),
-        '/onboarding' :(context) => const OnboardingPage(),
-        '/customer-sign-in' :(context) => CustomerSignInPage(),
-        '/customer-bottom-navbar' :(context) => CustomerBottomNavBar(),
-        '/customer-home' :(context) => const CustomerHomePage(),
-        '/cutomer-merchant-overview':(context) => const CustomerMerchantOverviewPage(),
-        '/cutomer-merchant-detail':(context) => const CutomerMerchantDetailPage(),
-        '/customer-order' :(context) => const CustomerOrderPage(),
-        '/customer-order-success' : (context) => CustomerOrderSuccessPage(),
-        '/merchant-sign-in' :(context) => const MerchantSignInPage(),
-      },
+      darkTheme: ThemeData(
+        scaffoldBackgroundColor: darkBackgroundColor,
+        appBarTheme: AppBarTheme(
+          backgroundColor: darkBackgroundColor,
+          elevation: 0,
+          centerTitle: true,
+          iconTheme: const IconThemeData(),
+          titleTextStyle: whiteTextStyle.copyWith(
+            fontSize: 20,
+            fontWeight: semiBold,
+          ),
+        ),
+      ),
+      themeMode: ThemeMode.system,
+      initialRoute: '/',
+      getPages: [
+        GetPage(name: '/', page: () => const SplashPage()),
+        GetPage(name: '/onboarding', page: () => const OnboardingPage()),
+        GetPage(name: '/customer-sign-in', page: () => CustomerSignInPage()),
+        GetPage(
+            name: '/customer-bottom-navbar',
+            page: () => CustomerBottomNavBar()),
+        GetPage(name: '/customer-home', page: () => const CustomerHomePage()),
+        GetPage(
+            name: '/customer-merchant-overview',
+            page: () => const CustomerMerchantOverviewPage()),
+        GetPage(name: '/customer-order', page: () => const CustomerOrderPage()),
+        GetPage(
+            name: '/customer-order-success',
+            page: () => CustomerOrderSuccessPage()),
+        GetPage(
+            name: '/merchant-sign-in', page: () => const MerchantSignInPage()),
+      ],
     );
   }
 }

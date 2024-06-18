@@ -46,12 +46,12 @@ class CustomerOrderPage extends StatelessWidget {
         itemCount: 3,
         itemBuilder: (context, index) {
           return CustomerOrderItem(
-              index: index,
-              imageUrl: loadedChartItem[index].imageUrl,
-              merchant: loadedChartItem[index].merchant,
-              menu: loadedChartItem[index].menu,
-              price: loadedChartItem[index].price,
-              quantity: loadedChartItem[index].quantity);
+            index: index,
+            imageUrl: loadedChartItem[index].imageUrl,
+            merchant: loadedChartItem[index].merchant,
+            menu: loadedChartItem[index].menu,
+            price: loadedChartItem[index].price,
+          );
         },
       ),
     );
@@ -94,8 +94,9 @@ class CustomerOrderPage extends StatelessWidget {
 
   Widget buildBotton(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamedAndRemoveUntil(context, '/customer-order-success', (route) => false);
+      onTap: () {
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/customer-order-success', (route) => false);
       },
       child: Container(
         margin: const EdgeInsets.only(left: 30),

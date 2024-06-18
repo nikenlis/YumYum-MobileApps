@@ -78,7 +78,10 @@ class CustomerHomePage extends StatelessWidget {
       margin: const EdgeInsets.only(top: 30),
       child: Row(
         children: [
-          Expanded(child: CustomSearchBar(controller: controller,)),
+          Expanded(
+              child: CustomSearchBar(
+            controller: controller,
+          )),
           const SizedBox(
             width: 12,
           ),
@@ -158,7 +161,9 @@ class CustomerHomePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 20),
-                  child: HomeCategoryItem(imageUrl: loadedCategories[index].imageUrl, title: loadedCategories[index].title),
+                  child: HomeCategoryItem(
+                      imageUrl: loadedCategories[index].imageUrl,
+                      title: loadedCategories[index].title),
                 );
               },
             ),

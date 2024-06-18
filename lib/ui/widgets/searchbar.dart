@@ -1,88 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 
-
-// class CustomSearchBar2 extends StatelessWidget {
-//   final String search;
-//   final double width;
-//   const CustomSearchBar( {
-//     required this.search,
-//     this.width = 275,
-//     super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: width,
-//       padding: const EdgeInsets.all(16),
-//       decoration: BoxDecoration(
-//         color: Colors.white,
-//         borderRadius: BorderRadius.circular(14),
-//         border: Border.all(color: greyColor)
-//       ),
-//       child: Row(
-//         children: [
-//           Icon(Icons.search_outlined, color: greyColor,),
-//           const SizedBox(width: 10,),
-//           Text(search, style: greyTextStyle.copyWith(),)
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-class CustomSearchBar extends StatefulWidget {
-  final TextEditingController? controller;
-  final Function(String)? onChanged;
-
-  CustomSearchBar({
-    required this.controller,
-    this.onChanged,
-    super.key,
-  });
+class SearchController extends GetxController {
+  var searchText = ''.obs;
+  final TextEditingController textEditingController = TextEditingController();
 
   @override
-  State<CustomSearchBar> createState() => _CustomSearchBarState();
+  void onInit() {
+    super.onInit();
+    textEditingController.addListener(() {
+      searchText.value = textEditingController.text;
+    });
+  }
+
+  void clearSearch() {
+    textEditingController.clear();
+  }
 }
 
-class _CustomSearchBarState extends State<CustomSearchBar> {
-  bool showClearIcon = false;
-  late final VoidCallback _controllerListener;
+class CustomSearchBar extends StatelessWidget {
+  final SearchController searchController = Get.put(SearchController());
 
-  @override
-  void initState() {
-    super.initState();
-    _controllerListener = () {
-      if (mounted) {
-        setState(() {
-          showClearIcon = widget.controller!.text.isNotEmpty;
-        });
-      }
-    };
-    widget.controller!.addListener(_controllerListener);
-  }
+  CustomSearchBar({super.key, required TextEditingController controller});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 51,
-      child: TextFormField(
-        controller: widget.controller,
-        onChanged: widget.onChanged,
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: whiteColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14),
-            borderSide: BorderSide(color: greyColor)
+      child: Obx(
+        () => TextFormField(
+          controller: searchController.textEditingController,
+          onChanged: (value) {
+            searchController.searchText.value = value;
+          },
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: whiteColor,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(14),
+              borderSide: BorderSide(color: greyColor),
+            ),
+            hintText: "What are you craving?",
+            prefixIcon: const Icon(Icons.search_outlined),
+            prefixIconColor: greyColor,
+            suffixIcon: searchController.searchText.value.isNotEmpty
+                ? IconButton(
+                    onPressed: searchController.clearSearch,
+                    icon: Icon(
+                      Icons.clear_outlined,
+                      size: 20,
+                    ),
+                  )
+                : null,
+            contentPadding: const EdgeInsets.symmetric(vertical: 10),
           ),
-          hintText: "What are you craving?",
-          prefixIcon: const Icon(Icons.search_outlined),
-          prefixIconColor: greyColor,
-          suffixIcon: showClearIcon ? IconButton(onPressed: (){
-            widget.controller!.clear();
-          }, icon: Icon(Icons.clear_outlined, size: 20,)) : null,
-          contentPadding: const EdgeInsets.symmetric(vertical: 10)
         ),
       ),
     );
