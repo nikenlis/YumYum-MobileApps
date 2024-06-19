@@ -9,30 +9,28 @@ class CustomerFavoriteMenuPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Favorite Menu'),
-        actions: [
-              CustomBadge(
-                value: "0",
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CustomerBottomNavBar(
-                                index: 2,
-                              )),
-                      (route) => false);
-                    },
-                    icon: const Icon(
-                      Icons.shopping_cart_outlined,
-                      size: 28,
-                    )),
-              ),
-              const SizedBox(
-                width: 20,
-              )
-            ]),
+      appBar: AppBar(title: const Text('Favorite Menu'), actions: [
+        CustomBadge(
+          value: "0",
+          child: IconButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const CustomerBottomNavBar(
+                              index: 2,
+                            )),
+                    (route) => false);
+              },
+              icon: const Icon(
+                Icons.shopping_cart_outlined,
+                size: 28,
+              )),
+        ),
+        const SizedBox(
+          width: 20,
+        )
+      ]),
       body: ListView(
         shrinkWrap: true,
         physics: const ScrollPhysics(),

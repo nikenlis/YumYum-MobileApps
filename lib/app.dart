@@ -43,19 +43,19 @@ class App extends StatelessWidget {
           ),
         ),
       ),
-      darkTheme: ThemeData(
-        scaffoldBackgroundColor: darkBackgroundColor,
-        appBarTheme: AppBarTheme(
-          backgroundColor: darkBackgroundColor,
-          elevation: 0,
-          centerTitle: true,
-          iconTheme: const IconThemeData(),
-          titleTextStyle: whiteTextStyle.copyWith(
-            fontSize: 20,
-            fontWeight: semiBold,
-          ),
-        ),
-      ),
+      // darkTheme: ThemeData(
+      //   scaffoldBackgroundColor: darkBackgroundColor,
+      //   appBarTheme: AppBarTheme(
+      //     backgroundColor: darkBackgroundColor,
+      //     elevation: 0,
+      //     centerTitle: true,
+      //     iconTheme: const IconThemeData(),
+      //     titleTextStyle: whiteTextStyle.copyWith(
+      //       fontSize: 20,
+      //       fontWeight: semiBold,
+      //     ),
+      //   ),
+      // ),
       themeMode: ThemeMode.system,
       initialRoute: '/',
       getPages: [
@@ -64,7 +64,7 @@ class App extends StatelessWidget {
         GetPage(name: '/customer-sign-in', page: () => CustomerSignInPage()),
         GetPage(
             name: '/customer-bottom-navbar',
-            page: () => const CustomerBottomNavBar()),
+            page: () => CustomerBottomNavBar()),
         GetPage(name: '/customer-home', page: () => const CustomerHomePage()),
         GetPage(
             name: '/customer-merchant-overview',

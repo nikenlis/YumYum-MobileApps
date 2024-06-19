@@ -1,4 +1,3 @@
-import 'package:expansion_tile_group/expansion_tile_group.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yumyum_amicta/models/merchant/order.dart';
@@ -13,13 +12,13 @@ class MerchantOrdersMasukItem extends StatelessWidget {
   final bool isBeingDelivered;
   final String note;
 
-  const MerchantOrdersMasukItem(
-      {super.key,
-      required this.customerName,
-      required this.jumlahItem,
-      required this.isBeingDelivered,
-      this.note = 'Pak jangan make bawang ya',
-      });
+  const MerchantOrdersMasukItem({
+    super.key,
+    required this.customerName,
+    required this.jumlahItem,
+    required this.isBeingDelivered,
+    this.note = 'Pak jangan make bawang ya',
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +56,9 @@ class MerchantOrdersMasukItem extends StatelessWidget {
                 customerName,
                 style: blackTextStyle.copyWith(fontSize: 16, fontWeight: bold),
               ),
-              SizedBox(height: 3,),
+              SizedBox(
+                height: 3,
+              ),
               Text(
                 "$jumlahItem menu",
                 style:
@@ -180,7 +181,11 @@ class MerchantOrdersMasukItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                         color: lightYellowColor,
                       ),
-                      child: Text(note, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis,),
+                      child: Text(
+                        note,
+                        textAlign: TextAlign.left,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     ),
                   ],
                 )),

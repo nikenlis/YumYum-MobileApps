@@ -29,7 +29,7 @@ class CustomCircularIcon extends StatelessWidget {
     return Obx(() => CircleAvatar(
           radius: adjustedSize,
           backgroundColor:
-              iconController.iconClicked.value ? Colors.red : purpleColor,
+              iconController.iconClicked.value ? purpleColor : purpleColor,
           child: Material(
             color: Colors.transparent,
             shape: const CircleBorder(),

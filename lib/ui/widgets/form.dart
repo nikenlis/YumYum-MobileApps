@@ -17,16 +17,22 @@ class CustomFormField extends StatelessWidget {
   final bool isShowTitle;
   final bool iconVisibility;
   final Function(String)? onFieldSubmitted;
+  final TextInputType keyboardType;
+  final TextInputAction textInputAction;
+  final FormFieldValidator<String>? validator;
 
   const CustomFormField({
-    super.key,
+    Key? key,
     required this.title,
     this.obsecureText = false,
     this.controller,
     this.isShowTitle = true,
     this.iconVisibility = false,
     this.onFieldSubmitted,
-  });
+    this.keyboardType = TextInputType.text,
+    this.textInputAction = TextInputAction.next,
+    this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +56,11 @@ class CustomFormField extends StatelessWidget {
             SizedBox(
               width: fieldWidth,
               child: TextFormField(
-                obscureText: formFieldController.obsecureText.value,
+                obscureText:
+                    formFieldController.obsecureText.value && obsecureText,
                 controller: controller,
+                keyboardType: keyboardType,
+                textInputAction: textInputAction,
                 decoration: InputDecoration(
                   hintText: !isShowTitle ? title : null,
                   border: OutlineInputBorder(
@@ -72,6 +81,7 @@ class CustomFormField extends StatelessWidget {
                       : null,
                 ),
                 onFieldSubmitted: onFieldSubmitted,
+                validator: validator,
               ),
             ),
           ],

@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
+
+class CustomerFavoriteMenuItemController extends GetxController {
+  void deleteItem() {
+    // Implement your delete logic here
+  }
+
+  void addItem() {
+    // Implement your add item logic here
+  }
+}
 
 class CustomerFavoriteMenuItem extends StatelessWidget {
   final int id;
@@ -10,23 +21,27 @@ class CustomerFavoriteMenuItem extends StatelessWidget {
   final String price;
   final String imageUrl;
   final VoidCallback? onPressed;
-  const CustomerFavoriteMenuItem(
-      {super.key,
-      required this.id,
-      required this.menu,
-      required this.merchant,
-      required this.price,
-      required this.imageUrl,
-      this.onPressed,
-      });
+
+  const CustomerFavoriteMenuItem({
+    super.key,
+    required this.id,
+    required this.menu,
+    required this.merchant,
+    required this.price,
+    required this.imageUrl,
+    this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final CustomerFavoriteMenuItemController controller =
+        Get.put(CustomerFavoriteMenuItemController());
+
     return Slidable(
       key: ValueKey(id),
       endActionPane: ActionPane(motion: const ScrollMotion(), children: [
         SlidableAction(
-          onPressed: (_) {},
+          onPressed: (_) => controller.deleteItem(),
           backgroundColor: greyColor,
           foregroundColor: whiteColor,
           icon: Icons.delete,
@@ -100,7 +115,7 @@ class CustomerFavoriteMenuItem extends StatelessWidget {
                   title: 'Tambah',
                   width: 100,
                   height: 45,
-                  onPressed: onPressed,
+                  onPressed: () => controller.addItem(),
                 )
               ],
             )

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/app.dart';
-
 import 'ui/widgets/customer/home_rekomendation_item.dart';
 
 void main() {
