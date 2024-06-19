@@ -47,32 +47,60 @@ class App extends StatelessWidget {
       themeMode: ThemeMode.system,
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/customer-profile', page: () => CustomerProfilePage()),
-        GetPage(name: '/', page: () => const SplashPage()),
-        GetPage(name: '/onboarding', page: () => const OnboardingPage()),
-        GetPage(name: '/customer-sign-in', page: () => CustomerSignInPage()),
+        GetPage(
+          name: '/customer-profile',
+          page: () => const CustomerProfilePage(),
+        ),
+        GetPage(
+          name: '/',
+          page: () => const SplashPage(),
+        ),
+        GetPage(
+          name: '/onboarding',
+          page: () => const OnboardingPage(),
+        ),
+        GetPage(
+          name: '/customer-sign-in',
+          page: () => CustomerSignInPage(),
+        ),
         GetPage(
             name: '/customer-bottom-navbar',
-            page: () => const CustomerBottomNavBar()),
-        GetPage(name: '/customer-home', page: () => const CustomerHomePage()),
+            page: () => CustomerBottomNavBar()),
         GetPage(
-            name: '/customer-merchant-overview',
-            page: () => const CustomerMerchantOverviewPage()),
+          name: '/customer-home',
+          page: () => const CustomerHomePage(),
+        ),
+        GetPage(
+          name: '/customer-merchant-overview',
+          page: () => const CustomerMerchantOverviewPage(),
+        ),
         GetPage(
             name: '/cutomer-merchant-detail',
             page: () => const CutomerMerchantDetailPage()),
-        GetPage(name: '/customer-order', page: () => const CustomerOrderPage()),
         GetPage(
-            name: '/customer-order-success',
-            page: () => const CustomerOrderSuccessPage()),
+          name: '/customer-order',
+          page: () => const CustomerOrderPage(),
+        ),
         GetPage(
-            name: '/customer-favorite',
-            page: () => const CustomerFavoriteMenuPage()),
-        GetPage(name: '/customer-catagory', page: () => CustomerCategoryPage()),
-        GetPage(name: '/merchant-sign-in', page: () => MerchantSignInPage()),
+          name: '/customer-order-success',
+          page: () => const CustomerOrderSuccessPage(),
+        ),
         GetPage(
-            name: '/merchant-bottom-navbar',
-            page: () => MerchantBottomNavBar()),
+          name: '/customer-favorite',
+          page: () => const CustomerFavoriteMenuPage(),
+        ),
+        GetPage(
+          name: '/customer-catagory',
+          page: () => CustomerCategoryPage(),
+        ),
+        GetPage(
+          name: '/merchant-sign-in',
+          page: () => MerchantSignInPage(),
+        ),
+        GetPage(
+          name: '/merchant-bottom-navbar',
+          page: () => const MerchantBottomNavBar(),
+        ),
       ],
     );
   }

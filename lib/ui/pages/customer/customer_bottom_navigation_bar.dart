@@ -1,72 +1,66 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_home_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_order_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_profile_page.dart';
 
-class CustomerBottomNavBar extends StatefulWidget {
-  const CustomerBottomNavBar({super.key, this.index = 0});
+class CustomerNavController extends GetxController {
+  var currentPageIndex = 0.obs;
 
-  final int index;
-
-  @override
-  State<CustomerBottomNavBar> createState() => _CustomerBottomNavBarState();
+  void setPageIndex(int index) {
+    currentPageIndex.value = index;
+  }
 }
 
-class _CustomerBottomNavBarState extends State<CustomerBottomNavBar> {
-  int currentPageIndex = 0;
-  CarouselController controller = CarouselController();
+class CustomerBottomNavBar extends StatelessWidget {
+  final CustomerNavController navController = Get.put(CustomerNavController());
+
   final List<Widget> pages = [
     const CustomerHomePage(),
     const CustomerMerchantOverviewPage(),
     const CustomerOrderPage(),
-    CustomerProfilePage()
+    const CustomerProfilePage()
   ];
 
-  @override
-  void initState() {
-    currentPageIndex = widget.index;
-    super.initState();
-  }
+  CustomerBottomNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: NavigationBar(
-          onDestinationSelected: (int index) {
-            setState(() {
-              currentPageIndex = index;
-            });
-          },
-          height: 80,
-          elevation: 0,
-          indicatorColor: lightGreyColor,
-          selectedIndex: currentPageIndex,
-          destinations: [
-            NavigationDestination(
-              icon: const Icon(Icons.home_outlined),
-              label: 'Home',
-              selectedIcon: Icon(
-                Icons.home_outlined,
-                color: purpleColor,
+      bottomNavigationBar: Obx(() => NavigationBar(
+            onDestinationSelected: (int index) {
+              navController.setPageIndex(index);
+            },
+            height: 80,
+            elevation: 0,
+            indicatorColor: lightGreyColor,
+            selectedIndex: navController.currentPageIndex.value,
+            destinations: [
+              NavigationDestination(
+                icon: const Icon(Icons.home_outlined),
+                label: 'Home',
+                selectedIcon: Icon(Icons.home_outlined, color: purpleColor),
               ),
-            ),
-            NavigationDestination(
+              NavigationDestination(
                 icon: const Icon(Icons.shop_outlined),
                 label: 'Merchant',
-                selectedIcon: Icon(Icons.shop_outlined, color: purpleColor)),
-            NavigationDestination(
+                selectedIcon: Icon(Icons.shop_outlined, color: purpleColor),
+              ),
+              NavigationDestination(
                 icon: const Icon(Icons.list_outlined),
                 label: 'Order',
-                selectedIcon: Icon(Icons.list_outlined, color: purpleColor)),
-            NavigationDestination(
+                selectedIcon: Icon(Icons.list_outlined, color: purpleColor),
+              ),
+              NavigationDestination(
                 icon: const Icon(Icons.person_outline),
                 label: 'Profile',
-                selectedIcon: Icon(Icons.person_outline, color: purpleColor)),
-          ]),
-      body: pages[currentPageIndex],
+                selectedIcon: Icon(Icons.person_outline, color: purpleColor),
+              ),
+            ],
+          )),
+      body: Obx(() => pages[navController.currentPageIndex.value]),
     );
   }
 }

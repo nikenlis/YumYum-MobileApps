@@ -20,9 +20,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CustomerBottomNavBar(
-                                index: 2,
-                              )),
+                          builder: (context) => CustomerBottomNavBar()),
                       (route) => false);
                 },
                 icon: const Icon(
