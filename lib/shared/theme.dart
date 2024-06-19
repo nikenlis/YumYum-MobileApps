@@ -7,6 +7,7 @@ Color redColor = const Color(0xFFED3443);
 Color greyColor = const Color(0xFF9B9B9B);
 Color lightGreyColor = const Color(0xFFF2F4F7);
 Color yellowColor = const Color(0xFFE59500);
+Color lightYellowColor = Color.fromARGB(255, 236, 215, 177);
 Color greenColor = const Color(0xFF18B23C);
 Color purpleColor = const Color(0xFF633FB0);
 Color lightBackgroundColor = const Color(0xffF6F8FB);

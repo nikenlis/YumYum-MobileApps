@@ -68,7 +68,10 @@ class CustomerProfilePage extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: GestureDetector(
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamedAndRemoveUntil(
+                                    context, '/customer-sign-in', (route) => false);
+              },
               child: Text(
                 'Log out',
                 style: blackTextStyle.copyWith(fontWeight: medium),

@@ -7,11 +7,11 @@ import 'package:yumyum_amicta/ui/widgets/form.dart';
 class CustomerSignInPage extends StatelessWidget {
   CustomerSignInPage({super.key});
 
-  final emailController = TextEditingController(text: '');
+  final studentNumberController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
 
   bool validate() {
-    if (emailController.text.isEmpty ||
+    if (studentNumberController.text.isEmpty ||
         passwordController.text.isEmpty) {
       return false;
     }
@@ -85,7 +85,7 @@ class CustomerSignInPage extends StatelessWidget {
                 // NOTE: EMAIL INPUT
                 CustomFormField(
                   title: 'Student Number',
-                  controller: emailController,
+                  controller: studentNumberController,
                 ),
                 const SizedBox(
                   height: 16,

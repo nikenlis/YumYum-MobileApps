@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/models/customer/merchant.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
-import 'package:yumyum_amicta/ui/widgets/customer_merchant_item.dart';
+import 'package:yumyum_amicta/ui/widgets/customer/customer_merchant_item.dart';
 import 'package:yumyum_amicta/ui/widgets/searchbar.dart';
 
 class CustomerMerchantOverviewPage extends StatelessWidget {
@@ -10,22 +10,17 @@ class CustomerMerchantOverviewPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(100),
-      child: AppBar(
-        flexibleSpace: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text('Merchant',style: blackTextStyle.copyWith(
+      appBar: AppBar(
+        title: Text('Merchant',style: blackTextStyle.copyWith(
             fontSize: 20,
             fontWeight: semiBold,
           ),),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: buildSearchBar(context)),
-          ],
-        ),
-      ),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(51),
+            child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24),
+                child: buildSearchBar(context)),
+          ),
       ),
       body: ListView(
         shrinkWrap: true,

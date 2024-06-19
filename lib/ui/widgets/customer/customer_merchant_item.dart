@@ -37,7 +37,7 @@ class CustomerMerchantItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/customer-merchant-detail',
+        Navigator.pushNamed(context, '/cutomer-merchant-detail',
             arguments: id);
       },
       child: Obx(

@@ -36,7 +36,7 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       content: Container(
         padding: const EdgeInsets.all(30),
-        height: mediaQuery.size.height * 0.5,
+        height: 450,
         width: mediaQuery.size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
@@ -50,7 +50,7 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
               child: Image.asset(
                 'assets/img_menu_makanan.png',
                 width: mediaQuery.size.width,
-                height: mediaQuery.size.height * 0.25,
+                height: 200,
                 fit: BoxFit.cover,
               ),
             ),

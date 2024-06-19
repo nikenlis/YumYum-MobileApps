@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/circular_icon.dart';
-import 'package:yumyum_amicta/ui/widgets/customer_merchant_more_detail_menu.dart';
+import 'package:yumyum_amicta/ui/widgets/customer/customer_merchant_more_detail_menu.dart';
 
 class MenuItemController extends GetxController {
   var isActive = 1.obs;
@@ -147,7 +147,7 @@ class CustomerMenuItem extends StatelessWidget {
                       )
                     : Center(
                         child: Container(
-                          margin: const EdgeInsets.only(top: 30),
+                          margin: const EdgeInsets.only(top: 20),
                           width: 80,
                           height: 30,
                           decoration: BoxDecoration(

@@ -40,7 +40,9 @@ class HomeRecomendationItem extends StatelessWidget {
     return Obx(() {
       final itemWidth = controller.itemWidth.value;
       return GestureDetector(
-        onTap: onPressed,
+        onTap: (){
+          Navigator.pushNamed(context, '/cutomer-merchant-detail');
+        },
         child: Container(
           height: 200,
           width: itemWidth,

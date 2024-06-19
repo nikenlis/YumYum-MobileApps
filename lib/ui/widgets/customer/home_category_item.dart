@@ -11,14 +11,16 @@ class HomeCategoryItemController extends GetxController {
 }
 
 class HomeCategoryItem extends StatelessWidget {
+  final String categoryName;
   final String imageUrl;
   final String title;
-  final VoidCallback? onTap;
+  // final VoidCallback? onTap;
 
   const HomeCategoryItem({
+    this.categoryName = 'Drink',
     required this.imageUrl,
     required this.title,
-    this.onTap,
+    // this.onTap,
     super.key,
   });
 
@@ -28,7 +30,10 @@ class HomeCategoryItem extends StatelessWidget {
     final double itemWidth = (mediaQuery.size.width / 3) - 75;
 
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        Navigator.pushNamed(context, '/customer-catagory',
+            arguments: categoryName);
+      },
       child: Column(
         children: [
           Container(

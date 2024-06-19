@@ -38,7 +38,7 @@ class CustomerOrderSuccessPage extends StatelessWidget {
               title: 'Back to Home',
               onPressed: () {
                 Navigator.pushNamedAndRemoveUntil(
-                    context, '/customer-home', (route) => false);
+                    context, '/customer-bottom-navbar', (route) => false);
               },
             ),
           ],

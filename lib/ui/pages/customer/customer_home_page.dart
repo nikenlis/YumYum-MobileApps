@@ -1,13 +1,11 @@
 import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:yumyum_amicta/models/customer/category.dart';
 import 'package:yumyum_amicta/models/customer/product.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
-import 'package:yumyum_amicta/ui/widgets/home_category_item.dart';
-import 'package:yumyum_amicta/ui/widgets/home_rekomendation_item.dart';
+import 'package:yumyum_amicta/ui/widgets/customer/home_category_item.dart';
+import 'package:yumyum_amicta/ui/widgets/customer/home_rekomendation_item.dart';
 import 'package:yumyum_amicta/ui/widgets/searchbar.dart';
 
 class CustomerHomePage extends StatelessWidget {
@@ -85,10 +83,14 @@ class CustomerHomePage extends StatelessWidget {
           const SizedBox(
             width: 12,
           ),
-          const Icon(
-            Icons.favorite_outline,
-            size: 25,
-          )
+          IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/customer-favorite');
+              },
+              icon: const Icon(
+                Icons.favorite_outline,
+                size: 25,
+              ))
         ],
       ),
     );
@@ -144,7 +146,7 @@ class CustomerHomePage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 24),
             child: Text(
-              'Category',
+              'Kategori',
               style:
                   blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
             ),
@@ -163,7 +165,8 @@ class CustomerHomePage extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 20),
                   child: HomeCategoryItem(
                       imageUrl: loadedCategories[index].imageUrl,
-                      title: loadedCategories[index].title),
+                      title: loadedCategories[index].title
+                      ),
                 );
               },
             ),
@@ -214,7 +217,9 @@ class CustomerHomePage extends StatelessWidget {
               menu: loadedProducts[i].name,
               merchant: 'Warung Bu rini',
               price: 'Rp ${loadedProducts[i].price}',
-              imageUrl: loadedProducts[i].imageUrl),
+              imageUrl: loadedProducts[i].imageUrl,
+              ),
+              
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.9,

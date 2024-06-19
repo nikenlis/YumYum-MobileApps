@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/models/customer/cart_item.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
-import 'package:yumyum_amicta/ui/widgets/customer_order_item.dart';
+import 'package:yumyum_amicta/ui/widgets/customer/customer_order_item.dart';
+import 'package:yumyum_amicta/ui/widgets/line_sparator.dart';
 
 class CustomerOrderPage extends StatelessWidget {
   const CustomerOrderPage({super.key});
@@ -61,13 +62,8 @@ class CustomerOrderPage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Container(
-          margin: const EdgeInsets.only(top: 20, bottom: 15),
-          width: double.infinity,
-          height: 3,
-          decoration: BoxDecoration(
-              color: greyColor, borderRadius: BorderRadius.circular(24)),
-        ),
+        DotLine(height: 2, color: greyColor),
+        const SizedBox(height: 15,),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(

@@ -20,7 +20,7 @@ class CustomFilledButton extends StatelessWidget {
     super.key,
     required this.title,
     this.width,
-    this.height,
+    this.height = 50,
     this.onPressed,
   });
 
@@ -28,12 +28,11 @@ class CustomFilledButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final buttonWidth = width ?? screenWidth * 0.8;
-    final buttonHeight = height ?? 50.0;
     final ButtonController buttonController = Get.put(ButtonController());
 
     return SizedBox(
       width: buttonWidth,
-      height: buttonHeight,
+      height: height,
       child: Obx(() => TextButton(
             onPressed: buttonController.isLoading.value ? null : onPressed,
             style: TextButton.styleFrom(
@@ -55,6 +54,53 @@ class CustomFilledButton extends StatelessWidget {
     );
   }
 }
+
+
+class CustomOutlineButton extends StatelessWidget {
+  final String title;
+  final double? width;
+  final double? height;
+  final VoidCallback? onPressed;
+
+  const CustomOutlineButton({
+    super.key,
+    required this.title,
+    this.width,
+    this.height = 50,
+    this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final buttonWidth = width ?? screenWidth * 0.8;
+    final ButtonController buttonController = Get.put(ButtonController());
+
+    return SizedBox(
+      width: buttonWidth,
+      height: height,
+      child: Obx(() => OutlinedButton(
+            onPressed: buttonController.isLoading.value ? null : onPressed,
+            style: OutlinedButton.styleFrom(
+              side: BorderSide(color: purpleColor, width: 2),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(56),
+              ),
+            ),
+            child: buttonController.isLoading.value
+                ? const CircularProgressIndicator(color: Colors.white)
+                : Text(
+                    title,
+                    style: purpleTextStyle.copyWith(
+                      fontSize: 16,
+                      fontWeight: semiBold,
+                    ),
+                  ),
+          )),
+    );
+  }
+}
+
 
 class CustomTextButton extends StatelessWidget {
   final String title;
