@@ -22,7 +22,7 @@ class _CustomerBottomNavBarState extends State<CustomerBottomNavBar> {
     const CustomerHomePage(),
     const CustomerMerchantOverviewPage(),
     const CustomerOrderPage(),
-    const CustomerProfilePage()
+    CustomerProfilePage()
   ];
 
   @override

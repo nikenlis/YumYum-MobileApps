@@ -60,17 +60,17 @@ class CustomerProfilePage extends StatelessWidget {
           const SizedBox(
             height: 14,
           ),
-          ProfilePersonalDetailItem(
+   const       ProfilePersonalDetailItem(
               title: 'Niken Lismiati', icon: Icons.person),
-          ProfilePersonalDetailItem(title: '22.11.4797', icon: Icons.house),
-          ProfilePersonalDetailItem(
+      const   ProfilePersonalDetailItem(title: '22.11.4797', icon: Icons.house),
+        const ProfilePersonalDetailItem(
               title: 'nikenlismiati@students.amikom.ac.id', icon: Icons.person),
           Align(
             alignment: Alignment.centerRight,
             child: GestureDetector(
               onTap: () {
                 Navigator.pushNamedAndRemoveUntil(
-                                    context, '/customer-sign-in', (route) => false);
+                    context, '/customer-sign-in', (route) => false);
               },
               child: Text(
                 'Log out',
@@ -81,9 +81,11 @@ class CustomerProfilePage extends StatelessWidget {
           const SizedBox(
             height: 87,
           ),
-          CustomTextButton(
-            title: 'Report a Problem',
-            onPressed: () {},
+          Center(
+            child: CustomTextButton(
+              title: 'Report a Problem',
+              onPressed: () {},
+            ),
           ),
           const SizedBox(
             height: 50,
