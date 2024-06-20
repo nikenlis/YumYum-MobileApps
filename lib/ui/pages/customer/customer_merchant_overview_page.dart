@@ -11,16 +11,19 @@ class CustomerMerchantOverviewPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Merchant',style: blackTextStyle.copyWith(
+        title: Text(
+          'Merchant',
+          style: blackTextStyle.copyWith(
             fontSize: 20,
             fontWeight: semiBold,
-          ),),
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(51),
-            child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: buildSearchBar(context)),
           ),
+        ),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(51),
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: buildSearchBar(context)),
+        ),
       ),
       body: ListView(
         shrinkWrap: true,
