@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/models/customer/product.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_bottom_navigation_bar.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_order_page.dart';
 import 'package:yumyum_amicta/ui/widgets/badge.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_menu_item.dart';
 
@@ -20,7 +21,8 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CustomerBottomNavBar()),
+                        builder: (context) => CustomerOrderPage(),
+                      ),
                       (route) => false);
                 },
                 icon: const Icon(
