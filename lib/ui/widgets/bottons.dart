@@ -15,13 +15,15 @@ class CustomFilledButton extends StatelessWidget {
   final double? width;
   final double? height;
   final VoidCallback? onPressed;
+  final double fontSize;
 
   const CustomFilledButton({
     super.key,
     required this.title,
     this.width,
     this.height = 50,
-    this.onPressed,
+    this.onPressed, 
+    this.fontSize = 16,
   });
 
   @override
@@ -46,7 +48,7 @@ class CustomFilledButton extends StatelessWidget {
                 : Text(
                     title,
                     style: whiteTextStyle.copyWith(
-                      fontSize: 16,
+                      fontSize: fontSize ,
                       fontWeight: semiBold,
                     ),
                   ),
@@ -61,6 +63,7 @@ class CustomOutlineButton extends StatelessWidget {
   final double? width;
   final double? height;
   final VoidCallback? onPressed;
+  final double fontSize;
 
   const CustomOutlineButton({
     super.key,
@@ -68,6 +71,7 @@ class CustomOutlineButton extends StatelessWidget {
     this.width,
     this.height = 50,
     this.onPressed,
+     this.fontSize = 16,
   });
 
   @override
@@ -92,7 +96,7 @@ class CustomOutlineButton extends StatelessWidget {
                 : Text(
                     title,
                     style: purpleTextStyle.copyWith(
-                      fontSize: 16,
+                      fontSize: fontSize,
                       fontWeight: semiBold,
                     ),
                   ),

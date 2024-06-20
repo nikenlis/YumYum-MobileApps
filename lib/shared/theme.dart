@@ -10,6 +10,7 @@ Color yellowColor = const Color(0xFFE59500);
 Color lightYellowColor =const  Color(0xFFECD7B1);
 Color greenColor = const Color(0xFF18B23C);
 Color purpleColor = const Color(0xFF633FB0);
+Color lightPurpleColor = Colors.purple.shade50;
 Color lightBackgroundColor = const Color(0xffF6F8FB);
 Color darkBackgroundColor = const Color(0xFF121212);
 

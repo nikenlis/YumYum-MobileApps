@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:yumyum_amicta/models/merchant/order.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 import 'package:yumyum_amicta/ui/widgets/line_sparator.dart';
 import 'package:yumyum_amicta/ui/widgets/merchant/merchant_orders_detail_menu_item..dart';
 
-class MerchantOrdersMasukItem extends StatelessWidget {
+class MerchantOrdersProsesItem extends StatelessWidget {
   final String customerName;
   final String jumlahItem;
-  final bool isBeingDelivered;
-  final String note;
-
-  const MerchantOrdersMasukItem({
-    super.key,
-    required this.customerName,
-    required this.jumlahItem,
-    required this.isBeingDelivered,
-    this.note = 'Pak jangan make bawang ya',
-  });
+    final bool isBeingDelivered;
+  final String? note;
+  const MerchantOrdersProsesItem({super.key, required this.customerName, required this.jumlahItem, required this.isBeingDelivered, this.note = 'Pak jangan make bawang ya'});
 
   @override
   Widget build(BuildContext context) {
-    final List<Order> loadedOrder = List.generate(7, (index) {
+    final List<Order> loadedOrderProses = List.generate(7, (index) {
       return Order(
           image:
               'https://yumyum.beliaplikasi.shop/storage/product/default-product.png',
@@ -34,69 +26,46 @@ class MerchantOrdersMasukItem extends StatelessWidget {
     });
 
     int total = 0;
-    final List<Order> orders = loadedOrder;
+    final List<Order> orders = loadedOrderProses;
     orders.forEach((order) {
       total += order.totalPrice;
     });
 
     return Card(
       elevation: 1,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(24),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.symmetric(horizontal: 12),
       child: Theme(
-        data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
-        child: ExpansionTile(
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                customerName,
-                style: blackTextStyle.copyWith(fontSize: 16, fontWeight: bold),
-              ),
-              SizedBox(
-                height: 3,
-              ),
-              Text(
-                "$jumlahItem menu",
-                style:
-                    greyTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Row(
-                children: [
-                 CustomOutlineButton(
-                    title: 'Tolak',
-                    onPressed: () {},
-                    width: 80,
-                    height: 30,
-                    fontSize: 12,
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  CustomFilledButton(
-                    title: 'Terima',
-                    onPressed: () {},
-                    width: 80,
-                    height: 30,
-                    fontSize: 12,
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 5,
-              )
-            ],
-          ),
+          data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+          child: ExpansionTile(
 
-          //bagian expandnya
-          children: [
-            Container(
+              //header
+              title: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                Text(
+                  customerName,
+                  style: blackTextStyle.copyWith(fontSize: 16, fontWeight: bold),
+                ),
+                const SizedBox(
+                  height: 3,
+                ),
+                Text(
+                  "$jumlahItem menu",
+                  style:
+                      greyTextStyle.copyWith(fontSize: 12, fontWeight: semiBold),
+                ),
+                            ],
+                          ),
+              ),
+
+
+              //bagian expandnya
+              children: [
+                Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.all(24),
                 color: whiteColor,
@@ -110,9 +79,9 @@ class MerchantOrdersMasukItem extends StatelessWidget {
                       itemCount: int.parse(jumlahItem),
                       itemBuilder: (context, index) {
                         return MerchantOrderDetailMenuItem(
-                          amount: loadedOrder[index].amount,
-                          namaMenu: loadedOrder[index].name,
-                          price: loadedOrder[index].price,
+                          amount: loadedOrderProses[index].amount,
+                          namaMenu: loadedOrderProses[index].name,
+                          price: loadedOrderProses[index].price,
                         );
                       },
                     ),
@@ -131,7 +100,7 @@ class MerchantOrdersMasukItem extends StatelessWidget {
                           style: blackTextStyle.copyWith(fontWeight: semiBold),
                         ),
                         Text(
-                          'Rp ${total}',
+                          'Rp $total',
                           style: blackTextStyle.copyWith(fontWeight: semiBold),
                         )
                       ],
@@ -172,10 +141,9 @@ class MerchantOrdersMasukItem extends StatelessWidget {
                       height: 10,
                     ),
                     DotLine(height: 1, color: greyColor),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    //nanti kalau udah ada api, cek dulu apakah note mengandung tulisan atau ga? kalo ngga maka nggausah tampilin
                     Container(
+                       margin: const EdgeInsets.only(top: 20),
                       padding: const EdgeInsets.all(12),
                       width: double.infinity,
                       height: 130,
@@ -183,17 +151,16 @@ class MerchantOrdersMasukItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                         color: lightYellowColor,
                       ),
-                      child: Text(
-                        note,
-                        textAlign: TextAlign.left,
-                        overflow: TextOverflow.ellipsis,
-                      ),
+                      child: Text(note!, textAlign: TextAlign.left, overflow: TextOverflow.ellipsis,),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomFilledButton(title: 'Pesanan Siap', onPressed: (){},)
                   ],
                 )),
-          ],
-        ),
-      ),
+              ],
+              )),
     );
   }
 }
