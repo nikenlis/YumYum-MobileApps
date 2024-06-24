@@ -1,41 +1,57 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/models/customer/cart_item.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_order_item.dart';
 import 'package:yumyum_amicta/ui/widgets/line_sparator.dart';
+
+class OrderController extends GetxController {
+  var totalPayment = 0.obs;
+
+  void calculateTotalPayment(List<int> prices) {
+    totalPayment.value = prices.fold(0, (sum, price) => sum + price);
+  }
+}
 
 class CustomerOrderPage extends StatelessWidget {
   const CustomerOrderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final OrderController orderController = Get.put(OrderController());
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Order'),
       ),
-      body: ListView(
-        shrinkWrap: true,
-        physics: const ScrollPhysics(),
-        children: [
-          buildListOrder(context),
-          buildTotalOrder(context),
-        ],
+      body: GetBuilder<OrderController>(
+        builder: (controller) {
+          return ListView(
+            shrinkWrap: true,
+            physics: const ScrollPhysics(),
+            children: [
+              buildListOrder(context),
+              buildTotalOrder(context, controller),
+            ],
+          );
+        },
       ),
-      floatingActionButton: buildBotton(context),
+      floatingActionButton: buildButton(context, orderController),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
   }
 
   Widget buildListOrder(BuildContext context) {
-    final List<CartItem> loadedChartItem = List.generate(30, (index) {
+    final List<CartItem> loadedCartItem = List.generate(30, (index) {
       return CartItem(
-          id: index,
-          menu: 'Bakso Urat + Ceker',
-          merchant: 'Bakso Tennis Pak Anton',
-          price: 10000,
-          quantity: 2,
-          isBeingDelivered: true,
-          imageUrl: 'assets/img_menu_makanan.png');
+        id: index,
+        menu: 'Bakso Urat + Ceker',
+        merchant: 'Bakso Tennis Pak Anton',
+        price: 10000,
+        quantity: 2,
+        isBeingDelivered: true,
+        imageUrl: 'assets/img_menu_makanan.png',
+      );
     });
 
     return Container(
@@ -48,22 +64,27 @@ class CustomerOrderPage extends StatelessWidget {
         itemBuilder: (context, index) {
           return CustomerOrderItem(
             index: index,
-            imageUrl: loadedChartItem[index].imageUrl,
-            merchant: loadedChartItem[index].merchant,
-            menu: loadedChartItem[index].menu,
-            price: loadedChartItem[index].price,
+            imageUrl: loadedCartItem[index].imageUrl,
+            merchant: loadedCartItem[index].merchant,
+            menu: loadedCartItem[index].menu,
+            price: loadedCartItem[index].price,
           );
         },
       ),
     );
   }
 
-  Widget buildTotalOrder(BuildContext context) {
+  Widget buildTotalOrder(BuildContext context, OrderController controller) {
+    List<int> prices = [10000, 10000, 10000];
+    controller.calculateTotalPayment(prices);
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         DotLine(height: 2, color: greyColor),
-        const SizedBox(height: 15,),
+        const SizedBox(
+          height: 15,
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Row(
@@ -74,10 +95,11 @@ class CustomerOrderPage extends StatelessWidget {
                 style:
                     blackTextStyle.copyWith(fontSize: 16, fontWeight: medium),
               ),
-              Text(
-                'Rp 35.000',
-                style: blackTextStyle.copyWith(fontSize: 16, fontWeight: bold),
-              )
+              Obx(() => Text(
+                    'Rp ${controller.totalPayment.value.toString()}',
+                    style:
+                        blackTextStyle.copyWith(fontSize: 16, fontWeight: bold),
+                  )),
             ],
           ),
         ),
@@ -88,7 +110,7 @@ class CustomerOrderPage extends StatelessWidget {
     );
   }
 
-  Widget buildBotton(BuildContext context) {
+  Widget buildButton(BuildContext context, OrderController controller) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamedAndRemoveUntil(
@@ -103,10 +125,11 @@ class CustomerOrderPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(56),
         ),
         child: Center(
-            child: Text(
-          'Pesan Sekarang',
-          style: whiteTextStyle.copyWith(fontSize: 15, fontWeight: semiBold),
-        )),
+          child: Text(
+            'Pesan Sekarang',
+            style: whiteTextStyle.copyWith(fontSize: 15, fontWeight: semiBold),
+          ),
+        ),
       ),
     );
   }

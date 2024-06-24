@@ -1,17 +1,14 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
-
 class CartItem {
-    int id;
-    String menu;
-    String merchant;
-    int price;
-    int quantity;
-    String imageUrl;
-    bool isBeingDelivered;
-    String? notes;
+  int id;
+  String menu;
+  String merchant;
+  int price;
+  int quantity;
+  String imageUrl;
+  bool isBeingDelivered;
+  String? notes;
 
-   CartItem({
+  CartItem({
     required this.id,
     required this.menu,
     required this.merchant,

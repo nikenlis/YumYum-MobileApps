@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/models/customer/category.dart';
 import 'package:yumyum_amicta/models/customer/product.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
@@ -8,25 +9,32 @@ import 'package:yumyum_amicta/ui/widgets/customer/home_category_item.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/home_rekomendation_item.dart';
 import 'package:yumyum_amicta/ui/widgets/searchbar.dart';
 
+class CustomerHomeController extends GetxController {}
+
 class CustomerHomePage extends StatelessWidget {
   const CustomerHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: ListView(
-          shrinkWrap: true,
-          physics: const ScrollPhysics(),
-          children: [
-            buildProfile(context),
-            buildSearchBar(context),
-            buildBanner(context),
-            buildCategory(context),
-            buildRecomendation(context)
-          ],
-        ),
-      ),
+    return GetBuilder<CustomerHomeController>(
+      init: CustomerHomeController(),
+      builder: (controller) {
+        return Scaffold(
+          body: SafeArea(
+            child: ListView(
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              children: [
+                buildProfile(context),
+                buildSearchBar(context),
+                buildBanner(context),
+                buildCategory(context),
+                buildRecomendation(context)
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 
@@ -77,20 +85,22 @@ class CustomerHomePage extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-              child: CustomSearchBar(
-            controller: controller,
-          )),
+            child: CustomSearchBar(
+              controller: controller,
+            ),
+          ),
           const SizedBox(
             width: 12,
           ),
           IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/customer-favorite');
-              },
-              icon: const Icon(
-                Icons.favorite_outline,
-                size: 25,
-              ))
+            onPressed: () {
+              Get.toNamed('/customer-favorite');
+            },
+            icon: const Icon(
+              Icons.favorite_outline,
+              size: 25,
+            ),
+          )
         ],
       ),
     );
@@ -103,27 +113,29 @@ class CustomerHomePage extends StatelessWidget {
       'assets/img_banner.png',
     ];
     return Container(
-        margin: const EdgeInsets.only(top: 30),
-        child: CarouselSlider(
-            items: imgList.map((item) {
-              return Container(
-                  decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(20)),
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Image.asset(
-                    item,
-                    fit: BoxFit.cover,
-                    width: 415,
-                  ));
-            }).toList(),
-            options: CarouselOptions(
-              height: 150,
-              autoPlay: true,
-              autoPlayInterval: const Duration(seconds: 6),
-              scrollDirection: Axis.horizontal,
-              viewportFraction: 0.9,
-              enableInfiniteScroll: true,
-            )));
+      margin: const EdgeInsets.only(top: 30),
+      child: CarouselSlider(
+        items: imgList.map((item) {
+          return Container(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Image.asset(
+              item,
+              fit: BoxFit.cover,
+              width: 415,
+            ),
+          );
+        }).toList(),
+        options: CarouselOptions(
+          height: 150,
+          autoPlay: true,
+          autoPlayInterval: const Duration(seconds: 6),
+          scrollDirection: Axis.horizontal,
+          viewportFraction: 0.9,
+          enableInfiniteScroll: true,
+        ),
+      ),
+    );
   }
 
   Widget buildCategory(BuildContext context) {
@@ -164,9 +176,9 @@ class CustomerHomePage extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.only(left: 20),
                   child: HomeCategoryItem(
-                      imageUrl: loadedCategories[index].imageUrl,
-                      title: loadedCategories[index].title
-                      ),
+                    imageUrl: loadedCategories[index].imageUrl,
+                    title: loadedCategories[index].title,
+                  ),
                 );
               },
             ),
@@ -182,15 +194,17 @@ class CustomerHomePage extends StatelessWidget {
   Widget buildRecomendation(BuildContext context) {
     final List<Product> loadedProducts = List.generate(7, (index) {
       return Product(
-          id: index,
-          categoryId: index + 5,
-          merchantId: index + 4,
-          name: "Product ${index + 1}",
-          imageUrl: 'assets/img_menu_makanan.png',
-          description: 'Ini adalah deskripsi produk ${index + 1}',
-          price: 10 + Random().nextInt(100) * 1000,
-          estimate: '5 menit');
+        id: index,
+        categoryId: index + 5,
+        merchantId: index + 4,
+        name: "Product ${index + 1}",
+        imageUrl: 'assets/img_menu_makanan.png',
+        description: 'Ini adalah deskripsi produk ${index + 1}',
+        price: 10 + Random().nextInt(100) * 1000,
+        estimate: '5 menit',
+      );
     });
+
     return ListView(
       shrinkWrap: true,
       physics: const ScrollPhysics(),
@@ -214,19 +228,18 @@ class CustomerHomePage extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           itemCount: 7,
           itemBuilder: (ctx, i) => HomeRecomendationItem(
-              menu: loadedProducts[i].name,
-              merchant: 'Warung Bu rini',
-              price: 'Rp ${loadedProducts[i].price}',
-              imageUrl: loadedProducts[i].imageUrl,
-              ),
-              
+            menu: loadedProducts[i].name,
+            merchant: 'Warung Bu rini',
+            price: 'Rp ${loadedProducts[i].price}',
+            imageUrl: loadedProducts[i].imageUrl,
+          ),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.9,
             crossAxisSpacing: 29,
             mainAxisSpacing: 29,
           ),
-        )
+        ),
       ],
     );
   }

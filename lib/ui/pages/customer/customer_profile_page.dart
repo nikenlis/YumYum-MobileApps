@@ -60,10 +60,11 @@ class CustomerProfilePage extends StatelessWidget {
           const SizedBox(
             height: 14,
           ),
-   const       ProfilePersonalDetailItem(
+          const ProfilePersonalDetailItem(
               title: 'Niken Lismiati', icon: Icons.person),
-      const   ProfilePersonalDetailItem(title: '22.11.4797', icon: Icons.house),
-        const ProfilePersonalDetailItem(
+          const ProfilePersonalDetailItem(
+              title: '22.11.4797', icon: Icons.house),
+          const ProfilePersonalDetailItem(
               title: 'nikenlismiati@students.amikom.ac.id', icon: Icons.email),
           Align(
             alignment: Alignment.centerRight,

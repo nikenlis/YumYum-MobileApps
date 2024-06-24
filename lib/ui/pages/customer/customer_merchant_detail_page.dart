@@ -1,59 +1,82 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/models/customer/product.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_bottom_navigation_bar.dart';
 import 'package:yumyum_amicta/ui/widgets/badge.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_menu_item.dart';
 
+class MerchantDetailController extends GetxController {
+  var isOpen = DateTime.now().hour >= 9 && DateTime.now().hour <= 21;
+
+  @override
+  void onInit() {
+    super.onInit();
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+  }
+}
+
 class CutomerMerchantDetailPage extends StatelessWidget {
   const CutomerMerchantDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(actions: [
-          CustomBadge(
-            value: "0",
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => CustomerBottomNavBar(index: 2,),
-                      ),
-                      (route) => false);
-                },
-                icon: const Icon(
-                  Icons.shopping_cart_outlined,
-                  size: 28,
-                )),
+    return GetBuilder<MerchantDetailController>(
+      init: MerchantDetailController(),
+      builder: (controller) {
+        return Scaffold(
+          appBar: AppBar(
+            actions: [
+              CustomBadge(
+                value: "0",
+                child: IconButton(
+                  onPressed: () {
+                    Get.offAll(() => CustomerBottomNavBar(index: 2));
+                  },
+                  icon: const Icon(
+                    Icons.shopping_cart_outlined,
+                    size: 28,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 20,
+              )
+            ],
           ),
-          const SizedBox(
-            width: 20,
-          )
-        ]),
-        body: ListView(
-          shrinkWrap: true,
-          physics: const PageScrollPhysics(),
-          children: [buildProfile(context), buildMenu(context)],
-        ));
+          body: ListView(
+            shrinkWrap: true,
+            physics: const PageScrollPhysics(),
+            children: [
+              buildProfile(context, controller),
+              buildMenu(context),
+            ],
+          ),
+        );
+      },
+    );
   }
 
-  Widget buildProfile(BuildContext context) {
-    bool isOpen = DateTime.now().hour >= 9 && DateTime.now().hour <= 21;
+  Widget buildProfile(
+      BuildContext context, MerchantDetailController controller) {
     return Container(
       margin: const EdgeInsets.only(top: 10),
       padding: const EdgeInsets.symmetric(horizontal: 24),
       child: Row(
         children: [
           ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: Image.asset(
-                'assets/img_merchant.png',
-                width: 100,
-                height: 100,
-              )),
+            borderRadius: BorderRadius.circular(24),
+            child: Image.asset(
+              'assets/img_merchant.png',
+              width: 100,
+              height: 100,
+            ),
+          ),
           const SizedBox(
             width: 15,
           ),
@@ -87,7 +110,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                 ),
                 Text(
                   'Online',
-                  style: isOpen
+                  style: controller.isOpen
                       ? greenTextStyle.copyWith(fontSize: 12, fontWeight: bold)
                       : yellowTextStyle.copyWith(
                           fontSize: 12, fontWeight: bold),
@@ -103,14 +126,15 @@ class CutomerMerchantDetailPage extends StatelessWidget {
   Widget buildMenu(BuildContext context) {
     final List<Product> loadedProducts = List.generate(7, (index) {
       return Product(
-          id: index,
-          categoryId: index + 5,
-          merchantId: index + 4,
-          name: "Product ${index + 1}",
-          imageUrl: 'assets/img_menu_makanan.png',
-          description: 'Ini adalah deskripsi produk ${index + 1}',
-          price: 10 + Random().nextInt(100) * 1000,
-          estimate: '10 min');
+        id: index,
+        categoryId: index + 5,
+        merchantId: index + 4,
+        name: "Product ${index + 1}",
+        imageUrl: 'assets/img_menu_makanan.png',
+        description: 'Ini adalah deskripsi produk ${index + 1}',
+        price: 10 + Random().nextInt(100) * 1000,
+        estimate: '10 min',
+      );
     });
     return ListView(
       shrinkWrap: true,
@@ -135,12 +159,13 @@ class CutomerMerchantDetailPage extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           itemCount: 7,
           itemBuilder: (ctx, i) => CustomerMenuItem(
-              id: loadedProducts[i].id,
-              menu: loadedProducts[i].name,
-              description: loadedProducts[i].description,
-              price: 'Rp ${loadedProducts[i].price}',
-              estimate: loadedProducts[i].estimate,
-              imageUrl: loadedProducts[i].imageUrl),
+            id: loadedProducts[i].id,
+            menu: loadedProducts[i].name,
+            description: loadedProducts[i].description,
+            price: 'Rp ${loadedProducts[i].price}',
+            estimate: loadedProducts[i].estimate,
+            imageUrl: loadedProducts[i].imageUrl,
+          ),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             childAspectRatio: 0.6,
