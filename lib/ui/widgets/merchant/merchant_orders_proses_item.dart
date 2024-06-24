@@ -3,7 +3,7 @@ import 'package:yumyum_amicta/models/merchant/order.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 import 'package:yumyum_amicta/ui/widgets/line_sparator.dart';
-import 'package:yumyum_amicta/ui/widgets/merchant/merchant_orders_detail_menu_item..dart';
+import 'package:yumyum_amicta/ui/widgets/merchant/merchant_orders_detail_menu_item.dart';
 
 class MerchantOrdersProsesItem extends StatelessWidget {
   final String customerName;

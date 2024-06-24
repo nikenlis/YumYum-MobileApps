@@ -17,7 +17,7 @@ class _MerchantBottomNavBarState extends State<MerchantBottomNavBar> {
   CarouselController controller = CarouselController();
   final List<Widget> pages = [
     const MerchantOrdersPage(),
-    const MerchantStatusMenuPage(),
+    MerchantStatusMenuPage(),
     const MerchantProfilePage(),
   ];
   

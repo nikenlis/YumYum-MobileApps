@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:yumyum_amicta/models/merchant/order.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 import 'package:yumyum_amicta/ui/widgets/line_sparator.dart';
-import 'package:yumyum_amicta/ui/widgets/merchant/merchant_orders_detail_menu_item..dart';
+import 'package:yumyum_amicta/ui/widgets/merchant/merchant_orders_detail_menu_item.dart';
 
 class MerchantOrdersMasukItem extends StatelessWidget {
   final String customerName;
@@ -56,7 +55,7 @@ class MerchantOrdersMasukItem extends StatelessWidget {
                 customerName,
                 style: blackTextStyle.copyWith(fontSize: 16, fontWeight: bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 3,
               ),
               Text(
@@ -131,7 +130,7 @@ class MerchantOrdersMasukItem extends StatelessWidget {
                           style: blackTextStyle.copyWith(fontWeight: semiBold),
                         ),
                         Text(
-                          'Rp ${total}',
+                          'Rp $total',
                           style: blackTextStyle.copyWith(fontWeight: semiBold),
                         )
                       ],

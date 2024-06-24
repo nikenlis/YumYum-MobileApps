@@ -12,7 +12,9 @@ import 'package:yumyum_amicta/ui/pages/customer/customer_order_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_order_success_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_profile_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_sign_in_page.dart';
+import 'package:yumyum_amicta/ui/pages/merchant/merchant_add_menu_page.dart';
 import 'package:yumyum_amicta/ui/pages/merchant/merchant_bottom_navigation_bar.dart';
+import 'package:yumyum_amicta/ui/pages/merchant/merchant_edit_menu_page.dart';
 import 'package:yumyum_amicta/ui/pages/merchant/merchant_sign_in_page.dart';
 import 'package:yumyum_amicta/ui/pages/onboarding_page.dart';
 import 'package:yumyum_amicta/ui/pages/splash_page.dart';
@@ -100,6 +102,14 @@ class App extends StatelessWidget {
         GetPage(
           name: '/merchant-bottom-navbar',
           page: () => const MerchantBottomNavBar(),
+        ),
+        GetPage(
+          name: '/merchant-add-menu',
+          page: () => const MerchantAddMenuPage(),
+        ),
+        GetPage(
+          name: '/merchant-edit-menu',
+          page: () => const MerchantEditMenuPage(),
         ),
       ],
     );

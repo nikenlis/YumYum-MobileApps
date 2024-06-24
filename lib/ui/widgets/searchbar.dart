@@ -47,7 +47,7 @@ class CustomSearchBar extends StatelessWidget {
             suffixIcon: searchController.searchText.value.isNotEmpty
                 ? IconButton(
                     onPressed: searchController.clearSearch,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.clear_outlined,
                       size: 20,
                     ),

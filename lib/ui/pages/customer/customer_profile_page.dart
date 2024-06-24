@@ -36,7 +36,7 @@ class CustomerProfilePage extends StatelessWidget {
                   DecorationImage(image: AssetImage('assets/img_profile.png'))),
         ),
         const SizedBox(
-          height: 5,
+          height: 10,
         ),
         Text(
           'Niken Lismiati',
@@ -64,7 +64,7 @@ class CustomerProfilePage extends StatelessWidget {
               title: 'Niken Lismiati', icon: Icons.person),
       const   ProfilePersonalDetailItem(title: '22.11.4797', icon: Icons.house),
         const ProfilePersonalDetailItem(
-              title: 'nikenlismiati@students.amikom.ac.id', icon: Icons.person),
+              title: 'nikenlismiati@students.amikom.ac.id', icon: Icons.email),
           Align(
             alignment: Alignment.centerRight,
             child: GestureDetector(

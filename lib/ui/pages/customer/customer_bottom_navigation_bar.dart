@@ -14,8 +14,23 @@ class CustomerNavController extends GetxController {
   }
 }
 
-class CustomerBottomNavBar extends StatelessWidget {
+class CustomerBottomNavBar extends StatefulWidget {
+
+  CustomerBottomNavBar({super.key, this.index = 0});
+  final int index;
+
+  @override
+  State<CustomerBottomNavBar> createState() => _CustomerBottomNavBarState();
+}
+
+class _CustomerBottomNavBarState extends State<CustomerBottomNavBar> {
   final CustomerNavController navController = Get.put(CustomerNavController());
+
+  @override
+  void initState() {
+    navController.currentPageIndex.value = widget.index;
+    super.initState();
+  }
 
   final List<Widget> pages = [
     const CustomerHomePage(),
@@ -23,8 +38,6 @@ class CustomerBottomNavBar extends StatelessWidget {
     const CustomerOrderPage(),
     const CustomerProfilePage()
   ];
-
-  CustomerBottomNavBar({super.key});
 
   @override
   Widget build(BuildContext context) {

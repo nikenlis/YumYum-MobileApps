@@ -17,7 +17,7 @@ class CustomerFavoriteMenuPage extends StatelessWidget {
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => CustomerBottomNavBar()),
+                        builder: (context) => CustomerBottomNavBar(index: 2,)),
                     (route) => false);
               },
               icon: const Icon(

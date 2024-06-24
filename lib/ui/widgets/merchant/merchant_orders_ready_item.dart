@@ -10,7 +10,7 @@ class MerchantOrdersReadyItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12, left: 24, right: 24),
+      margin: const EdgeInsets.only(left: 24, right: 24),
       padding: const EdgeInsets.symmetric(horizontal: 24),
       width: double.infinity,
       height: 60,
@@ -26,13 +26,15 @@ class MerchantOrdersReadyItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Pesanan dari $customerName',),
+                Text('Pesanan dari $customerName', overflow: TextOverflow.ellipsis,),
                 Text("$jumlahItem menu",)
               ],
             ),
           ),
 
-          const CustomFilledButton(title: 'Selesai', width: 80, height: 30, fontSize: 12,)
+          CustomFilledButton(title: 'Selesai', width: 80, height: 30, fontSize: 12, onPressed: () {
+            
+          },)
 
         ],
       )

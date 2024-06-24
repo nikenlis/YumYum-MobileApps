@@ -28,7 +28,9 @@ class HomeCategoryItem extends StatelessWidget {
     final double itemWidth = (mediaQuery.size.width / 3) - 75;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamedAndRemoveUntil(context, '/customer-catagory', (route) => false);
+      },
       child: Column(
         children: [
           Container(

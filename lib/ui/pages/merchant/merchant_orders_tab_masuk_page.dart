@@ -16,7 +16,7 @@ class MerchantOrdersTabMasukPage extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return Container(
             margin: const EdgeInsets.only(bottom: 24),
-            child: MerchantOrdersMasukItem(
+            child: const MerchantOrdersMasukItem(
               customerName: 'Niken Lismiati',
               jumlahItem: '4',
               isBeingDelivered: true,

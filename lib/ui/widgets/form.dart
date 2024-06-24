@@ -22,7 +22,7 @@ class CustomFormField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
 
   const CustomFormField({
-    Key? key,
+    super.key,
     required this.title,
     this.obsecureText = false,
     this.controller,
@@ -32,7 +32,7 @@ class CustomFormField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.textInputAction = TextInputAction.next,
     this.validator,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +66,7 @@ class CustomFormField extends StatelessWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(14),
                   ),
-                  contentPadding: EdgeInsets.all(mediaQuery.size.width * 0.05),
+                  contentPadding: EdgeInsets.all(mediaQuery.size.width * 0.04),
                   suffixIcon: iconVisibility
                       ? IconButton(
                           onPressed: () {
