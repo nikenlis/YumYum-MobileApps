@@ -32,7 +32,7 @@ class CustomerFavoriteMenuController extends GetxController {
 }
 
 class CustomerFavoriteMenuPage extends StatelessWidget {
-  const CustomerFavoriteMenuPage({super.key});
+  const CustomerFavoriteMenuPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +47,7 @@ class CustomerFavoriteMenuPage extends StatelessWidget {
             value: "0",
             child: IconButton(
               onPressed: () {
-                Get.offAll(() => const CustomerBottomNavBar(index: 2));
+                Get.to(() => const CustomerBottomNavBar(index: 2));
               },
               icon: const Icon(
                 Icons.shopping_cart_outlined,
@@ -60,16 +60,18 @@ class CustomerFavoriteMenuPage extends StatelessWidget {
           )
         ],
       ),
-      body: Obx(() {
-        final favoriteProducts = favoriteMenuController.favoriteProducts;
-        return ListView(
-          shrinkWrap: true,
-          physics: const ScrollPhysics(),
-          children: [
-            buildListFavItem(context, favoriteProducts),
-          ],
-        );
-      }),
+      body: GetBuilder<CustomerFavoriteMenuController>(
+        builder: (controller) {
+          final favoriteProducts = controller.favoriteProducts;
+          return ListView(
+            shrinkWrap: true,
+            physics: const ScrollPhysics(),
+            children: [
+              buildListFavItem(context, favoriteProducts),
+            ],
+          );
+        },
+      ),
     );
   }
 
