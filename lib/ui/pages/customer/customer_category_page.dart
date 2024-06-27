@@ -36,7 +36,7 @@ class CustomerCategoryPage extends StatelessWidget {
   final CustomerCategoryController categoryController =
       Get.find<CustomerCategoryController>();
 
-  CustomerCategoryPage({super.key});
+  CustomerCategoryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,10 +78,12 @@ class CustomerCategoryPage extends StatelessWidget {
             padding: const EdgeInsets.only(left: 24),
             child: Text(
               'Ganjel perut buat naikin mood.',
-              style:
-                  blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+              style: blackTextStyle.copyWith(
+                fontSize: 16,
+                fontWeight: semiBold,
+              ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -91,7 +93,7 @@ class CustomerCategoryPage extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       physics: const ScrollPhysics(),
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       itemCount: products.length,
       itemBuilder: (ctx, i) => CustomerMenuItem(
         id: products[i].id,
@@ -105,7 +107,7 @@ class CustomerCategoryPage extends StatelessWidget {
         crossAxisCount: 2,
         childAspectRatio: 0.6,
         crossAxisSpacing: 29,
-        mainAxisSpacing: 29,
+        mainAxisSpacing: 20,
       ),
     );
   }

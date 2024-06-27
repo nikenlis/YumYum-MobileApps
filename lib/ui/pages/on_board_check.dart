@@ -6,15 +6,15 @@ import 'package:yumyum_amicta/ui/pages/customer/customer_sign_in_page.dart';
 
 
 class OnBoardCheck extends StatelessWidget {
-  const OnBoardCheck({super.key});
+  const OnBoardCheck({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // Pastikan AuthManagerController sudah diinisialisasi di main.dart atau tempat lain yang sesuai
     AuthenticationManager _authManager = Get.find();
-
     return Obx(() {
        print('BISAAA NGGGA NIHHHHHHH: ${_authManager.isLogged.value}');
-      return _authManager.isLogged.value ? const CustomerBottomNavBar() : CustomerSignInPage();
+      return _authManager.isLogged.value ? CustomerBottomNavBar() : CustomerSignInPage();
     });
   }
 }

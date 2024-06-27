@@ -19,7 +19,7 @@ class CustomerBottomNavBar extends StatefulWidget {
   final int index;
 
   @override
-  State<CustomerBottomNavBar> createState() => _CustomerBottomNavBarState();
+  _CustomerBottomNavBarState createState() => _CustomerBottomNavBarState();
 }
 
 class _CustomerBottomNavBarState extends State<CustomerBottomNavBar> {
@@ -35,42 +35,37 @@ class _CustomerBottomNavBarState extends State<CustomerBottomNavBar> {
     const CustomerHomePage(),
     const CustomerMerchantOverviewPage(),
     const CustomerOrderPage(),
-    CustomerProfilePage()
+    CustomerProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Obx(() => NavigationBar(
-            onDestinationSelected: (int index) {
+      bottomNavigationBar: Obx(() => BottomNavigationBar(
+            onTap: (index) {
               navController.setPageIndex(index);
             },
-            height: 80,
-            elevation: 0,
-            indicatorColor: lightGreyColor,
-            selectedIndex: navController.currentPageIndex.value,
-            destinations: [
-              NavigationDestination(
-                icon: const Icon(Icons.home_outlined),
+            currentIndex: navController.currentPageIndex.value,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home_outlined),
                 label: 'Home',
-                selectedIcon: Icon(Icons.home_outlined, color: purpleColor),
               ),
-              NavigationDestination(
-                icon: const Icon(Icons.shop_outlined),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.shop_outlined),
                 label: 'Merchant',
-                selectedIcon: Icon(Icons.shop_outlined, color: purpleColor),
               ),
-              NavigationDestination(
-                icon: const Icon(Icons.list_outlined),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.list_outlined),
                 label: 'Order',
-                selectedIcon: Icon(Icons.list_outlined, color: purpleColor),
               ),
-              NavigationDestination(
-                icon: const Icon(Icons.person_outline),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline),
                 label: 'Profile',
-                selectedIcon: Icon(Icons.person_outline, color: purpleColor),
               ),
             ],
+            selectedItemColor: purpleColor,
+            unselectedItemColor: Colors.black,
           )),
       body: Obx(() => pages[navController.currentPageIndex.value]),
     );
