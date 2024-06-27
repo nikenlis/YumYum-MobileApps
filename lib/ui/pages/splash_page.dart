@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/auth/core/auth_manager_controller.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_bottom_navigation_bar.dart';
 import 'package:yumyum_amicta/ui/pages/on_board_check.dart';
 import 'package:yumyum_amicta/ui/pages/onboarding_page.dart';
 
@@ -32,11 +33,9 @@ class _SplashPageState extends State<SplashPage> {
           if (snapshot.hasError) {
             return errorView(snapshot);
           } else {
-            if (_authManager.isLogged.value == true) {
+            
               return const OnBoardCheck(); // Halaman jika pengguna sudah login
-            } else {
-              return const OnboardingPage(); // Konten onboarding
-            }
+           
           }
         }
       },

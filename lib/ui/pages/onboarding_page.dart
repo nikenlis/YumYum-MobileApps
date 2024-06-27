@@ -1,6 +1,9 @@
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
+import 'package:yumyum_amicta/ui/auth/core/auth_manager_controller.dart';
 import 'package:yumyum_amicta/ui/pages/on_board_check.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 
@@ -12,6 +15,7 @@ class OnboardingPage extends StatefulWidget {
 }
 
 class _OnboardingPageState extends State<OnboardingPage> {
+ 
   int currentIndex = 0;
   CarouselController controller = CarouselController();
 
@@ -27,9 +31,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
     'Easily find your type of food craving and you’ll get delivery in wide range.',
   ];
 
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -105,10 +110,10 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             CustomFilledButton(
                               title: 'Sign-in',
                               onPressed: () {
-                                Navigator.pushReplacement(
+                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const OnBoardCheck(),
+                                    builder: (context) => OnBoardCheck(),
                                   ),
                                 );
                               },

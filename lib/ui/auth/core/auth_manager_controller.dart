@@ -14,6 +14,7 @@ class AuthenticationManager extends GetxController with CacheManager {
     //Token is cached
     print('Login AuthenticationManager token: ${token}');
     await saveToken(token);
+    print('STATUS TERSAVE ? ${token}');
   }
 
   void checkLoginStatus() {

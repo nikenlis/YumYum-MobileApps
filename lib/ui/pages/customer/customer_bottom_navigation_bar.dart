@@ -23,7 +23,7 @@ class CustomerBottomNavBar extends StatefulWidget {
 }
 
 class _CustomerBottomNavBarState extends State<CustomerBottomNavBar> {
-  final CustomerNavController navController = Get.find<CustomerNavController>();
+  final CustomerNavController navController = Get.put(CustomerNavController());
 
   @override
   void initState() {

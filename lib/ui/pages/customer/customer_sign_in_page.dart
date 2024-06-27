@@ -9,7 +9,6 @@ import 'package:yumyum_amicta/ui/widgets/form.dart';
 class CustomerSignInController extends GetxController {
   final studentNumberController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
-  final LoginViewModel _viewModel = Get.put(LoginViewModel());
 
   bool validate() {
     if (studentNumberController.text.isEmpty ||
@@ -17,14 +16,6 @@ class CustomerSignInController extends GetxController {
       return false;
     }
     return true;
-  }
-
-  void signIn(BuildContext context) {
-    if (validate()) {
-     _viewModel.loginUser(studentNumberController.text, passwordController.text);
-    } else {
-      showCustomSnackbar(context, 'Semua Field Harus diIsi');
-    }
   }
 
   @override
@@ -35,114 +26,135 @@ class CustomerSignInController extends GetxController {
   }
 }
 
+
+
 class CustomerSignInPage extends StatelessWidget {
   CustomerSignInPage({super.key});
 
+  final LoginViewModel _viewModel = Get.put(LoginViewModel());
+  final studentNumberController = TextEditingController(text: '');
+  final passwordController = TextEditingController(text: '');
+
+  bool validate() {
+    if (studentNumberController.text.isEmpty ||
+        passwordController.text.isEmpty) {
+      return false;
+    }
+    return true;
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CustomerSignInController>(
-      init: CustomerSignInController(),
-      builder: (controller) {
-        return Scaffold(
-          body: ListView(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
+    return Scaffold(
+      body: ListView(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 24,
+        ),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: 60,
-                    height: 50,
-                    margin: const EdgeInsets.only(
-                      top: 100,
-                      bottom: 100,
-                    ),
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/img_logo.png',
-                        ),
-                      ),
+              Container(
+                width: 60,
+                height: 50,
+                margin: const EdgeInsets.only(
+                  top: 100,
+                  bottom: 100,
+                ),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      'assets/img_logo.png',
                     ),
                   ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  Container(
-                    width: 155,
-                    height: 50,
-                    margin: const EdgeInsets.only(
-                      top: 100,
-                      bottom: 100,
-                    ),
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          'assets/img_logo_name.png',
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Text(
-                'Sign In to Your\nAccount',
-                style: blackTextStyle.copyWith(
-                  fontSize: 20,
-                  fontWeight: semiBold,
                 ),
               ),
               const SizedBox(
-                height: 30,
+                width: 5,
               ),
               Container(
-                padding: const EdgeInsets.all(22),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: whiteColor,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomFormField(
-                      title: 'Student Number',
-                      controller: controller.studentNumberController,
-                    ),
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    CustomFormField(
-                      title: 'Password',
-                      obsecureText: true,
-                      iconVisibility: true,
-                      controller: controller.passwordController,
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    CustomFilledButton(
-                      title: 'Sign In',
-                      onPressed: () => controller.signIn(context),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
+                width: 155,
                 height: 50,
-              ),
-              CustomTextButton(
-                title: 'Masuk sebagai merchant',
-                onPressed: () {
-                  Get.offAllNamed('/merchant-sign-in');
-                },
+                margin: const EdgeInsets.only(
+                  top: 100,
+                  bottom: 100,
+                ),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      'assets/img_logo_name.png',
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
-        );
-      },
+          Text(
+            'Sign In to Your\nAccount',
+            style: blackTextStyle.copyWith(
+              fontSize: 20,
+              fontWeight: semiBold,
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          Container(
+            padding: const EdgeInsets.all(22),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: whiteColor,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // NOTE: EMAIL INPUT
+                CustomFormField(
+                  title: 'Student Number',
+                  controller: studentNumberController,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                // NOTE: PASSWORD INPUT
+                CustomFormField(
+                  title: 'Password',
+                  obsecureText: true,
+                  iconVisibility: true,
+                  controller: passwordController,
+                ),
+                const SizedBox(
+                  height: 8,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                CustomFilledButton(
+                  title: 'Sign In',
+                  onPressed: () async {
+                    if (validate()) {
+                    await _viewModel.loginUser(studentNumberController.text, passwordController.text);
+                    } else {
+                      showCustomSnackbar(context, 'Semua Field Harus diIsi');
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 50,
+          ),
+          CustomTextButton(
+            title: 'Masuk sebagai merchant',
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(
+                  context, '/merchant-sign-in', (route) => false);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

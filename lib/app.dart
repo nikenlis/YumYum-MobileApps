@@ -71,7 +71,7 @@ class App extends StatelessWidget {
         GetPage(
           name: '/customer-bottom-navbar',
           page: () => const CustomerBottomNavBar(),
-          binding: CustomerBinding(),
+          // binding: CustomerBinding(),
         ),
         GetPage(
           name: '/customer-home',
