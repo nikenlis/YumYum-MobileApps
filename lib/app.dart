@@ -53,6 +53,7 @@ class App extends StatelessWidget {
         GetPage(
           name: '/customer-profile',
           page: () => const CustomerProfilePage(),
+          binding: CustomerBinding(),
         ),
         GetPage(
           name: '/',
@@ -64,7 +65,8 @@ class App extends StatelessWidget {
         ),
         GetPage(
           name: '/customer-sign-in',
-          page: () => CustomerSignInPage(),
+          page: () => const CustomerSignInPage(),
+          binding: CustomerBinding(),
         ),
         GetPage(
           name: '/customer-bottom-navbar',
@@ -87,10 +89,12 @@ class App extends StatelessWidget {
         GetPage(
           name: '/customer-order',
           page: () => const CustomerOrderPage(),
+          binding: CustomerBinding(),
         ),
         GetPage(
           name: '/customer-order-success',
           page: () => const CustomerOrderSuccessPage(),
+          binding: CustomerBinding(),
         ),
         GetPage(
           name: '/customer-favorite',
@@ -105,6 +109,7 @@ class App extends StatelessWidget {
         GetPage(
           name: '/merchant-sign-in',
           page: () => MerchantSignInPage(),
+          binding: CustomerBinding(),
         ),
         GetPage(
           name: '/merchant-bottom-navbar',

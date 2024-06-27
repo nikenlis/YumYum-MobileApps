@@ -1,23 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 import 'package:yumyum_amicta/ui/widgets/profile_personal_detail_item.dart';
+
+class CustomerProfileController extends GetxController {}
 
 class CustomerProfilePage extends StatelessWidget {
   const CustomerProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Profile'),
-      ),
-      body: ListView(
-        children: [
-          buildImageProfile(context),
-          buildPersonalDetail(context),
-        ],
-      ),
+    return GetBuilder<CustomerProfileController>(
+      init: CustomerProfileController(),
+      builder: (controller) {
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Profile'),
+          ),
+          body: ListView(
+            children: [
+              buildImageProfile(context),
+              buildPersonalDetail(context),
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -31,9 +39,11 @@ class CustomerProfilePage extends StatelessWidget {
           width: 100,
           height: 100,
           decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              image:
-                  DecorationImage(image: AssetImage('assets/img_profile.png'))),
+            shape: BoxShape.circle,
+            image: DecorationImage(
+              image: AssetImage('assets/img_profile.png'),
+            ),
+          ),
         ),
         const SizedBox(
           height: 10,
@@ -70,8 +80,7 @@ class CustomerProfilePage extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: GestureDetector(
               onTap: () {
-                Navigator.pushNamedAndRemoveUntil(
-                    context, '/customer-sign-in', (route) => false);
+                Get.offAllNamed('/customer-sign-in');
               },
               child: Text(
                 'Log out',

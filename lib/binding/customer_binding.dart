@@ -6,6 +6,9 @@ import 'package:yumyum_amicta/ui/pages/customer/customer_home_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_detail_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_order_page.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_order_success_page.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_profile_page.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_sign_in_page.dart';
 
 class CustomerBinding extends Bindings {
   @override
@@ -18,5 +21,9 @@ class CustomerBinding extends Bindings {
     Get.lazyPut<MerchantDetailController>(() => MerchantDetailController());
     Get.lazyPut<MerchantOverviewController>(() => MerchantOverviewController());
     Get.lazyPut<CustomerOrderController>(() => CustomerOrderController());
+    Get.lazyPut<CustomerOrderSuccessController>(
+        () => CustomerOrderSuccessController());
+    Get.lazyPut<CustomerProfileController>(() => CustomerProfileController());
+    Get.lazyPut<CustomerSignInController>(() => CustomerSignInController());
   }
 }

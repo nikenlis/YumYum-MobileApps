@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 
-class OrderSuccessController extends GetxController {
+class CustomerOrderSuccessController extends GetxController {
   var successMessage = "Pesanan Berhasil".obs;
 
   var deliveryStatus = "Mohon tunggu sebentar\npesanan akan segera diantar".obs;
@@ -22,7 +22,8 @@ class CustomerOrderSuccessPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderSuccessController controller = Get.put(OrderSuccessController());
+    final CustomerOrderSuccessController controller =
+        Get.put(CustomerOrderSuccessController());
 
     return Scaffold(
       body: Center(
