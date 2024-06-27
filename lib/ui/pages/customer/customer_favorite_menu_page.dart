@@ -1,24 +1,52 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:yumyum_amicta/models/customer/product.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_bottom_navigation_bar.dart';
 import 'package:yumyum_amicta/ui/widgets/badge.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_favorite_menu_item.dart';
 
-// Stateless widget for displaying favorite menu items
+class CustomerFavoriteMenuController extends GetxController {
+  var favoriteProducts = <Product>[].obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    loadFavoriteProducts();
+  }
+
+  void loadFavoriteProducts() {
+    List<Product> loadedProducts = List.generate(6, (index) {
+      return Product(
+        id: index,
+        categoryId: index + 5,
+        merchantId: index + 4,
+        name: 'Bakso Urat + Ceker',
+        imageUrl: 'assets/img_menu_makanan.png',
+        description: 'Bakso Tennis',
+        price: 10000,
+        estimate: '10 min',
+      );
+    });
+    favoriteProducts.assignAll(loadedProducts);
+  }
+}
+
 class CustomerFavoriteMenuPage extends StatelessWidget {
   const CustomerFavoriteMenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final CustomerFavoriteMenuController favoriteMenuController =
+        Get.put(CustomerFavoriteMenuController());
+
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Favorite Menu'), // Title of the app bar
+        title: const Text('Favorite Menu'),
         actions: [
-          // Action button for shopping cart with badge
           CustomBadge(
-            value: "0", // Initial value of badge
+            value: "0",
             child: IconButton(
               onPressed: () {
-                // Navigate to Order page (index 2) in CustomerBottomNavBar and remove all previous routes
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
@@ -37,31 +65,33 @@ class CustomerFavoriteMenuPage extends StatelessWidget {
           )
         ],
       ),
-      body: ListView(
-        shrinkWrap: true,
-        physics: const ScrollPhysics(),
-        children: [
-          buildListFavItem(context), // Build the list of favorite menu items
-        ],
-      ),
+      body: Obx(() {
+        final favoriteProducts = favoriteMenuController.favoriteProducts;
+        return ListView(
+          shrinkWrap: true,
+          physics: const ScrollPhysics(),
+          children: [
+            buildListFavItem(context, favoriteProducts),
+          ],
+        );
+      }),
     );
   }
 
-  // Widget for building the list of favorite menu items
-  Widget buildListFavItem(BuildContext context) {
+  Widget buildListFavItem(BuildContext context, List<Product> products) {
     return Container(
       margin: const EdgeInsets.only(top: 10),
       child: ListView.builder(
         shrinkWrap: true,
         physics: const ScrollPhysics(),
-        itemCount: 6, // Hard-coded number of favorite items
+        itemCount: products.length,
         itemBuilder: (context, index) {
           return CustomerFavoriteMenuItem(
-            id: index,
-            menu: 'Bakso Urat + Ceker', // Example menu name
-            merchant: 'Bakso Tennis', // Example merchant name
-            price: 'Rp 10.000', // Example price in Indonesian Rupiah
-            imageUrl: 'assets/img_menu_makanan.png', // Example image URL
+            id: products[index].id,
+            menu: products[index].name,
+            merchant: products[index].description,
+            price: 'Rp ${products[index].price}',
+            imageUrl: products[index].imageUrl,
           );
         },
       ),

@@ -4,13 +4,10 @@ import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 
 class OrderSuccessController extends GetxController {
-  // State untuk menampilkan teks pesanan berhasil
   var successMessage = "Pesanan Berhasil".obs;
 
-  // State untuk menampilkan teks status pengantaran
   var deliveryStatus = "Mohon tunggu sebentar\npesanan akan segera diantar".obs;
 
-  // Metode untuk mengubah pesan pengantaran
   void updateDeliveryStatus(bool isDelivering) {
     if (isDelivering) {
       deliveryStatus.value = "Pesanan sedang diantar";
@@ -57,8 +54,7 @@ class CustomerOrderSuccessPage extends StatelessWidget {
               width: 183,
               title: 'Back to Home',
               onPressed: () {
-                Get.offNamed(
-                    '/customer-bottom-navbar'); // Menggunakan GetX untuk navigasi
+                Get.offNamed('/customer-bottom-navbar');
               },
             ),
           ],

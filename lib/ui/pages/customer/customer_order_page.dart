@@ -5,7 +5,7 @@ import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_order_item.dart';
 import 'package:yumyum_amicta/ui/widgets/line_sparator.dart';
 
-class OrderController extends GetxController {
+class CustomerOrderController extends GetxController {
   var totalPayment = 0.obs;
 
   void calculateTotalPayment(List<int> prices) {
@@ -18,13 +18,14 @@ class CustomerOrderPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final OrderController orderController = Get.put(OrderController());
+    final CustomerOrderController orderController =
+        Get.put(CustomerOrderController());
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Order'),
       ),
-      body: GetBuilder<OrderController>(
+      body: GetBuilder<CustomerOrderController>(
         builder: (controller) {
           return ListView(
             shrinkWrap: true,
@@ -74,7 +75,7 @@ class CustomerOrderPage extends StatelessWidget {
     );
   }
 
-  Widget buildTotalOrder(BuildContext context, OrderController controller) {
+  Widget buildTotalOrder(BuildContext context, CustomerOrderController controller) {
     List<int> prices = [10000, 10000, 10000];
     controller.calculateTotalPayment(prices);
 
@@ -110,7 +111,7 @@ class CustomerOrderPage extends StatelessWidget {
     );
   }
 
-  Widget buildButton(BuildContext context, OrderController controller) {
+  Widget buildButton(BuildContext context, CustomerOrderController controller) {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamedAndRemoveUntil(

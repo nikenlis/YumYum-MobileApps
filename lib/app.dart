@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:yumyum_amicta/binding/customer_binding.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_bottom_navigation_bar.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_category_page.dart';
@@ -66,19 +67,23 @@ class App extends StatelessWidget {
           page: () => CustomerSignInPage(),
         ),
         GetPage(
-            name: '/customer-bottom-navbar',
-            page: () => CustomerBottomNavBar()),
+          name: '/customer-bottom-navbar',
+          page: () => const CustomerBottomNavBar(),
+          binding: CustomerBinding(),
+        ),
         GetPage(
           name: '/customer-home',
           page: () => const CustomerHomePage(),
+          binding: CustomerBinding(),
         ),
         GetPage(
           name: '/customer-merchant-overview',
           page: () => const CustomerMerchantOverviewPage(),
         ),
         GetPage(
-            name: '/cutomer-merchant-detail',
-            page: () => const CutomerMerchantDetailPage()),
+          name: '/cutomer-merchant-detail',
+          page: () => const CutomerMerchantDetailPage(),
+        ),
         GetPage(
           name: '/customer-order',
           page: () => const CustomerOrderPage(),
@@ -90,10 +95,12 @@ class App extends StatelessWidget {
         GetPage(
           name: '/customer-favorite',
           page: () => const CustomerFavoriteMenuPage(),
+          binding: CustomerBinding(),
         ),
         GetPage(
           name: '/customer-catagory',
           page: () => CustomerCategoryPage(),
+          binding: CustomerBinding(),
         ),
         GetPage(
           name: '/merchant-sign-in',

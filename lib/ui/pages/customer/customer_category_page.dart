@@ -1,9 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yumyum_amicta/models/customer/product.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_menu_item.dart';
-import 'dart:math';
-import 'package:yumyum_amicta/models/customer/product.dart';
 
 class CustomerCategoryController extends GetxController {
   var products = <Product>[].obs;
@@ -11,7 +12,6 @@ class CustomerCategoryController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-
     loadProducts();
   }
 
@@ -34,7 +34,7 @@ class CustomerCategoryController extends GetxController {
 
 class CustomerCategoryPage extends StatelessWidget {
   final CustomerCategoryController categoryController =
-      Get.put(CustomerCategoryController());
+      Get.find<CustomerCategoryController>();
 
   CustomerCategoryPage({super.key});
 
@@ -43,6 +43,12 @@ class CustomerCategoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kategori'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Get.back();
+          },
+        ),
       ),
       body: Obx(() {
         final products = categoryController.products;

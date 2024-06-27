@@ -5,11 +5,14 @@ import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_merchant_item.dart';
 import 'package:yumyum_amicta/ui/widgets/searchbar.dart';
 
-import 'package:get/get.dart';
-import 'package:yumyum_amicta/models/customer/merchant.dart';
-
 class MerchantOverviewController extends GetxController {
   var merchants = List<Merchant>.empty().obs;
+
+  @override
+  void onInit() {
+    fetchMerchants();
+    super.onInit();
+  }
 
   void fetchMerchants() {
     List<Merchant> loadedMerchant = List.generate(30, (index) {
@@ -25,12 +28,6 @@ class MerchantOverviewController extends GetxController {
       );
     });
     merchants.assignAll(loadedMerchant);
-  }
-
-  @override
-  void onInit() {
-    fetchMerchants();
-    super.onInit();
   }
 }
 

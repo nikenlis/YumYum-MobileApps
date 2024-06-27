@@ -36,7 +36,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                 value: "0",
                 child: IconButton(
                   onPressed: () {
-                    Get.offAll(() => CustomerBottomNavBar(index: 2));
+                    Get.offAll(() => const CustomerBottomNavBar(index: 2));
                   },
                   icon: const Icon(
                     Icons.shopping_cart_outlined,
