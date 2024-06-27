@@ -52,7 +52,7 @@ class App extends StatelessWidget {
       getPages: [
         GetPage(
           name: '/customer-profile',
-          page: () => const CustomerProfilePage(),
+          page: () => CustomerProfilePage(),
           binding: CustomerBinding(),
         ),
         GetPage(
@@ -65,7 +65,7 @@ class App extends StatelessWidget {
         ),
         GetPage(
           name: '/customer-sign-in',
-          page: () => const CustomerSignInPage(),
+          page: () => CustomerSignInPage(),
           binding: CustomerBinding(),
         ),
         GetPage(

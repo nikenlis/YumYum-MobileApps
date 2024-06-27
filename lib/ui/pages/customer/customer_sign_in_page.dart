@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/share_method.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
+import 'package:yumyum_amicta/ui/auth/login_view_model.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 import 'package:yumyum_amicta/ui/widgets/form.dart';
 
 class CustomerSignInController extends GetxController {
   final studentNumberController = TextEditingController(text: '');
   final passwordController = TextEditingController(text: '');
+  final LoginViewModel _viewModel = Get.put(LoginViewModel());
 
   bool validate() {
     if (studentNumberController.text.isEmpty ||
@@ -19,7 +21,7 @@ class CustomerSignInController extends GetxController {
 
   void signIn(BuildContext context) {
     if (validate()) {
-      Get.offAllNamed('/customer-bottom-navbar');
+     _viewModel.loginUser(studentNumberController.text, passwordController.text);
     } else {
       showCustomSnackbar(context, 'Semua Field Harus diIsi');
     }
@@ -34,7 +36,7 @@ class CustomerSignInController extends GetxController {
 }
 
 class CustomerSignInPage extends StatelessWidget {
-  const CustomerSignInPage({super.key});
+  CustomerSignInPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
+import 'package:yumyum_amicta/ui/auth/core/auth_manager_controller.dart';
+import 'package:yumyum_amicta/ui/pages/on_board_check.dart';
+import 'package:yumyum_amicta/ui/pages/onboarding_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -10,16 +14,53 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-@override
-  void initState() {
-    Timer(const Duration(seconds: 2), () {
-      Navigator.pushNamedAndRemoveUntil(context, '/onboarding', (route) => false);
-    });
-    super.initState();
+  final AuthenticationManager _authManager = Get.put(AuthenticationManager());
+
+  Future<void> initializeSettings() async {
+    _authManager.checkLoginStatus();
+    await Future.delayed(const Duration(seconds: 2));
   }
 
   @override
   Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: initializeSettings(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return splashView();
+        } else {
+          if (snapshot.hasError) {
+            return errorView(snapshot);
+          } else {
+            if (_authManager.isLogged.value == true) {
+              return const OnBoardCheck(); // Halaman jika pengguna sudah login
+            } else {
+              return const OnboardingPage(); // Konten onboarding
+            }
+          }
+        }
+      },
+    );
+  }
+
+  Scaffold waitingView() {
+    return const Scaffold(
+        body: Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Padding(
+            padding: EdgeInsets.all(16.0),
+            child: CircularProgressIndicator(),
+          ),
+          Text('Loading...'),
+        ],
+      ),
+    ));
+  }
+
+  Scaffold splashView() {
     var size = MediaQuery.of(context).size.width * 1.5;
     return Scaffold(
       body: Stack(
@@ -32,8 +73,10 @@ class _SplashPageState extends State<SplashPage> {
               height: size,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: RadialGradient(
-                      colors: [purpleColor.withOpacity(0.8), whiteColor.withOpacity(0.5)])),
+                  gradient: RadialGradient(colors: [
+                    purpleColor.withOpacity(0.8),
+                    whiteColor.withOpacity(0.5)
+                  ])),
             ),
           ),
           Positioned(
@@ -44,8 +87,10 @@ class _SplashPageState extends State<SplashPage> {
               height: size,
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  gradient: RadialGradient(
-                      colors: [purpleColor.withOpacity(0.8), whiteColor.withOpacity(0.5)])),
+                  gradient: RadialGradient(colors: [
+                    purpleColor.withOpacity(0.8),
+                    whiteColor.withOpacity(0.5)
+                  ])),
             ),
           ),
           Center(
@@ -53,12 +98,16 @@ class _SplashPageState extends State<SplashPage> {
               width: 337,
               height: 262,
               decoration: const BoxDecoration(
-                image: DecorationImage(image: AssetImage('assets/img_logo_splash.png'))
-              ),
+                  image: DecorationImage(
+                      image: AssetImage('assets/img_logo_splash.png'))),
             ),
           )
         ],
       ),
     );
+  }
+
+  Scaffold errorView(AsyncSnapshot<Object?> snapshot) {
+    return Scaffold(body: Center(child: Text('Error: ${snapshot.error}')));
   }
 }

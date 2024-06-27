@@ -29,7 +29,7 @@ class HomeCategoryItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamedAndRemoveUntil(context, '/customer-catagory', (route) => false);
+        Navigator.pushNamed(context, '/customer-catagory',);
       },
       child: Column(
         children: [

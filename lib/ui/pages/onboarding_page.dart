@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
+import 'package:yumyum_amicta/ui/pages/on_board_check.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
-
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -105,8 +105,12 @@ class _OnboardingPageState extends State<OnboardingPage> {
                             CustomFilledButton(
                               title: 'Sign-in',
                               onPressed: () {
-                                Navigator.pushNamedAndRemoveUntil(
-                                    context, '/customer-sign-in', (route) => false);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const OnBoardCheck(),
+                                  ),
+                                );
                               },
                             ),
                             const SizedBox(
@@ -124,9 +128,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               ),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: currentIndex == 0
-                                    ? purpleColor
-                                    : greyColor,
+                                color:
+                                    currentIndex == 0 ? purpleColor : greyColor,
                               ),
                             ),
                             Container(
@@ -137,9 +140,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               ),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: currentIndex == 1
-                                    ? purpleColor
-                                    : greyColor,
+                                color:
+                                    currentIndex == 1 ? purpleColor : greyColor,
                               ),
                             ),
                             Container(
@@ -150,9 +152,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               ),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
-                                color: currentIndex == 2
-                                    ? purpleColor
-                                    : greyColor,
+                                color:
+                                    currentIndex == 2 ? purpleColor : greyColor,
                               ),
                             ),
                             const Spacer(),

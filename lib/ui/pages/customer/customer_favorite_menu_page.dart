@@ -47,12 +47,7 @@ class CustomerFavoriteMenuPage extends StatelessWidget {
             value: "0",
             child: IconButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => CustomerBottomNavBar(index: 2)),
-                  (route) => false,
-                );
+                Get.offAll(() => const CustomerBottomNavBar(index: 2));
               },
               icon: const Icon(
                 Icons.shopping_cart_outlined,

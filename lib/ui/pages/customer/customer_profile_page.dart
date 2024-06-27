@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
+import 'package:yumyum_amicta/ui/auth/core/auth_manager_controller.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 import 'package:yumyum_amicta/ui/widgets/profile_personal_detail_item.dart';
 
 class CustomerProfileController extends GetxController {}
 
 class CustomerProfilePage extends StatelessWidget {
-  const CustomerProfilePage({super.key});
+  CustomerProfilePage({super.key});
+  AuthenticationManager _authManager = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +82,7 @@ class CustomerProfilePage extends StatelessWidget {
             alignment: Alignment.centerRight,
             child: GestureDetector(
               onTap: () {
-                Get.offAllNamed('/customer-sign-in');
+                _authManager.logOut();
               },
               child: Text(
                 'Log out',

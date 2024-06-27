@@ -43,12 +43,6 @@ class CustomerCategoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Kategori'),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Get.back();
-          },
-        ),
       ),
       body: Obx(() {
         final products = categoryController.products;
