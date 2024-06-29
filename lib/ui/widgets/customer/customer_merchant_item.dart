@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 
-class MerchantItemController extends GetxController {
-  var isOpen = true.obs;
-
-  void toggleOpen() {
-    isOpen.value = !isOpen.value;
-  }
-}
 
 class CustomerMerchantItem extends StatelessWidget {
-  final int id;
+  final int index;
   final String name;
   final String imageUrl;
   final String description;
   final int isOpen;
 
   const CustomerMerchantItem({
-    required this.id,
+    required this.index,
     required this.name,
     required this.imageUrl,
     required this.description,
-    this.isOpen = 1,
+    required this.isOpen,
     super.key,
   });
 
@@ -31,23 +25,18 @@ class CustomerMerchantItem extends StatelessWidget {
     double screenWidth = MediaQuery.of(context).size.width;
     double containerWidth = screenWidth / 2 - 50;
 
-    final MerchantItemController merchantItemController =
-        Get.put(MerchantItemController());
-    merchantItemController.isOpen.value = isOpen == 1;
-
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, '/cutomer-merchant-detail',
-            arguments: id);
+            arguments: index);
       },
-      child: Obx(
-        () => Container(
+      child: Container(
           height: 110,
           width: double.infinity,
           margin: const EdgeInsets.only(bottom: 24),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(24),
-            color: merchantItemController.isOpen.value ? whiteColor : greyColor,
+            color: isOpen == 1 ? whiteColor : greyColor,
           ),
           child: Row(
             children: [
@@ -57,7 +46,7 @@ class CustomerMerchantItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(11),
                   image: DecorationImage(
-                    image: AssetImage(imageUrl),
+                    image: NetworkImage(imageUrl),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -93,7 +82,7 @@ class CustomerMerchantItem extends StatelessWidget {
             ],
           ),
         ),
-      ),
+
     );
   }
 }

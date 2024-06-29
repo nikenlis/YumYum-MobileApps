@@ -1,33 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/models/customer/merchant.dart';
+import 'package:yumyum_amicta/models/merchant_model/merchant_model.dart';
+import 'package:yumyum_amicta/models/merchant_model/super_merchant_request_model.dart';
+import 'package:yumyum_amicta/models/merchant_model/super_merchant_response_model.dart';
+import 'package:yumyum_amicta/models/product_model/product_model.dart';
+import 'package:yumyum_amicta/services/home_merchant_service.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_merchant_item.dart';
 import 'package:yumyum_amicta/ui/widgets/searchbar.dart';
 
 class MerchantOverviewController extends GetxController {
-  var merchants = List<Merchant>.empty().obs;
+  var merchants = List<MerchantModel>.empty().obs;
+  var products = List<ProductModel>.empty().obs;
+  var loading = false.obs;
+  late GetMerchantOverview _getAllDataMerchant;
 
   @override
   void onInit() {
-    fetchMerchants();
+    _getAllDataMerchant = Get.put(GetMerchantOverview());
     super.onInit();
+    getListMerchantAndProducts();
   }
 
-  void fetchMerchants() {
-    List<Merchant> loadedMerchant = List.generate(30, (index) {
-      return Merchant(
-        id: index,
-        username: 'Anton',
-        name: 'Bakso Tennis Pak Anton',
-        imageUrl: 'assets/img_merchant.png',
-        description: 'Jajanan, Sweet, Cepat Saji, Roti',
-        password: 123,
-        deviceId: 'samsung',
-        rememberToken: '123',
+  void getListMerchantAndProducts() async {
+    loading(true);
+    try {
+      SuperMerchantRequestModel requestModel = SuperMerchantRequestModel(
+        limitProduct: 1,
+        search: "",
+        hideCategory: true,
+        hideInacticveProduct: false,
       );
-    });
-    merchants.assignAll(loadedMerchant);
+
+      SuperMerchantResponseModel? response =
+          await _getAllDataMerchant.fetchMerchants(requestModel);
+
+      if (response != null) {
+        merchants.assignAll(response.merchantModel!);
+        for (var merchant in response.merchantModel!) {
+          var product = merchant.productModel;
+          if (product != null) {
+            products.addAll(product);
+          }
+        }
+      } else {
+        Text(
+          'Ngga ada data',
+          style: blackTextStyle.copyWith(fontSize: 50),
+        );
+      }
+    } finally {
+      loading(false);
+    }
   }
 }
 
@@ -56,13 +81,16 @@ class CustomerMerchantOverviewPage extends StatelessWidget {
               ),
             ),
           ),
-          body: ListView(
-            shrinkWrap: true,
-            physics: const ScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            children: [
-              buildMerchantList(context, controller),
-            ],
+          body: Container(
+            margin: const EdgeInsets.only(top: 10),
+            child: ListView(
+              shrinkWrap: true,
+              physics: const ScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              children: [
+                buildMerchantList(context, controller),
+              ],
+            ),
           ),
         );
       },
@@ -84,12 +112,13 @@ class CustomerMerchantOverviewPage extends StatelessWidget {
           physics: const NeverScrollableScrollPhysics(),
           itemCount: controller.merchants.length,
           itemBuilder: (context, index) {
-            Merchant merchant = controller.merchants[index];
+            MerchantModel merchant = controller.merchants[index];
             return CustomerMerchantItem(
-              id: merchant.id!,
-              name: merchant.name!,
-              imageUrl: merchant.imageUrl!,
+              index: index,
+              name: merchant.username!,
+              imageUrl: merchant.photo!,
               description: merchant.description!,
+              isOpen: merchant.isOpen!,
             );
           },
         ));

@@ -22,7 +22,7 @@ class CustomerCategoryController extends GetxController {
         categoryId: index + 5,
         merchantId: index + 4,
         name: "Product ${index + 1}",
-        imageUrl: 'assets/img_menu_makanan.png',
+        imageUrl: 'https://yumyum.beliaplikasi.shop/storage/product/default-product.png',
         description: 'Ini adalah deskripsi produk ${index + 1}',
         price: 10 + Random().nextInt(100) * 1000,
         estimate: '10 min',
@@ -36,7 +36,7 @@ class CustomerCategoryPage extends StatelessWidget {
   final CustomerCategoryController categoryController =
       Get.find<CustomerCategoryController>();
 
-  CustomerCategoryPage({Key? key}) : super(key: key);
+  CustomerCategoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class CustomerCategoryPage extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       itemCount: products.length,
       itemBuilder: (ctx, i) => CustomerMenuItem(
-        id: products[i].id,
+        id: i,
         menu: products[i].name,
         description: products[i].description,
         price: 'Rp ${products[i].price}',

@@ -1,9 +1,6 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
-import 'package:yumyum_amicta/ui/auth/core/auth_manager_controller.dart';
 import 'package:yumyum_amicta/ui/pages/on_board_check.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 
@@ -113,7 +110,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => OnBoardCheck(),
+                                    builder: (context) => const OnBoardCheck(),
                                   ),
                                 );
                               },

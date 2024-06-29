@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:yumyum_amicta/ui/auth/models/login_request_model.dart';
 import 'package:yumyum_amicta/ui/auth/models/login_response_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:yumyum_amicta/ui/utils/api_endpoints.dart';
+import 'package:http/http.dart' as http;
 
 class LoginService {
   Future<LoginResponseModel?> fetchLogin(LoginRequestModel model) async {

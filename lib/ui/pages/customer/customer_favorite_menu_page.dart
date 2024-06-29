@@ -32,7 +32,7 @@ class CustomerFavoriteMenuController extends GetxController {
 }
 
 class CustomerFavoriteMenuPage extends StatelessWidget {
-  const CustomerFavoriteMenuPage({Key? key}) : super(key: key);
+  const CustomerFavoriteMenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {

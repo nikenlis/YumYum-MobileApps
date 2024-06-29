@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yumyum_amicta/models/product_model/product_model.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_detail_page.dart';
+import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 
 class DetailMenuController extends GetxController {
   var isActive = true.obs;
   var isFavorite = false.obs;
+  MerchantOverviewController merchantOverviewController = Get.find();
+  var products = List<ProductModel>.empty().obs;
+
+  @override
+  void onInit() {
+    products.assignAll(merchantOverviewController.products);
+    super.onInit();
+  }
 
   void toggleFavorite() {
     isFavorite.value = !isFavorite.value;
@@ -14,6 +25,8 @@ class DetailMenuController extends GetxController {
   void setActive(bool value) {
     isActive.value = value;
   }
+
+
 }
 
 class CustomerMerchantMoreDetailMenu extends StatelessWidget {
@@ -29,14 +42,15 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
     final DetailMenuController detailMenuController =
         Get.put(DetailMenuController());
     final mediaQuery = MediaQuery.of(context);
+    ProductModel product = detailMenuController.products[id];
 
-    return AlertDialog(
+    return Obx(()=> AlertDialog(
       backgroundColor: Colors.transparent,
       insetPadding: EdgeInsets.zero,
       alignment: Alignment.bottomCenter,
       content: Container(
         padding: const EdgeInsets.all(30),
-        height: 450,
+        height: 480,
         width: mediaQuery.size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
@@ -47,8 +61,8 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(24),
-              child: Image.asset(
-                'assets/img_menu_makanan.png',
+              child: Image.network(
+                product.image!,
                 width: mediaQuery.size.width,
                 height: 200,
                 fit: BoxFit.cover,
@@ -56,25 +70,25 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             Text(
-              'Title Product 1',
+              product.name!,
               style:
                   blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
             ),
             const SizedBox(height: 10),
             Text(
-              'Bakso Urat dengan + 2 ceker',
+              product.description!,
               style: blackTextStyle.copyWith(fontSize: 16, fontWeight: regular),
               overflow: TextOverflow.ellipsis,
               maxLines: 3,
             ),
             const SizedBox(height: 13),
             Text(
-              'Rp 10.000',
+              product.price!,
               style:
                   blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
             ),
             const SizedBox(height: 25),
-            Obx(() => detailMenuController.isActive.value
+            detailMenuController.isActive.value
                 ? Row(
                     children: [
                       Expanded(
@@ -110,10 +124,10 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
                         child: Text('Tutup', style: blackTextStyle),
                       ),
                     ),
-                  )),
+                  ),
           ],
         ),
       ),
-    );
+    ));
   }
 }
