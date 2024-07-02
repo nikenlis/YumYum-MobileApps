@@ -27,7 +27,6 @@ class CustomerSignInController extends GetxController {
 }
 
 
-
 class CustomerSignInPage extends StatelessWidget {
   CustomerSignInPage({super.key});
 

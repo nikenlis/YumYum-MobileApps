@@ -32,7 +32,7 @@ class _CustomerBottomNavBarState extends State<CustomerBottomNavBar> {
   }
 
   final List<Widget> pages = [
-    const CustomerHomePage(),
+    CustomerHomePage(),
     const CustomerMerchantOverviewPage(),
     const CustomerOrderPage(),
     CustomerProfilePage(),

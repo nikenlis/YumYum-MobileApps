@@ -1,33 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yumyum_amicta/controllers/pages/customer_controller/merchant_controller/merchant_detail_controller.dart';
+import 'package:yumyum_amicta/controllers/pages/customer_controller/merchant_controller/customer_merchant_more_detail_menu_controller.dart';
 import 'package:yumyum_amicta/models/product_model/product_model.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
-import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_detail_page.dart';
-import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 
-class DetailMenuController extends GetxController {
-  var isActive = true.obs;
-  var isFavorite = false.obs;
-  MerchantOverviewController merchantOverviewController = Get.find();
-  var products = List<ProductModel>.empty().obs;
-
-  @override
-  void onInit() {
-    products.assignAll(merchantOverviewController.products);
-    super.onInit();
-  }
-
-  void toggleFavorite() {
-    isFavorite.value = !isFavorite.value;
-  }
-
-  void setActive(bool value) {
-    isActive.value = value;
-  }
-
-
-}
 
 class CustomerMerchantMoreDetailMenu extends StatelessWidget {
   final int id;
@@ -39,8 +17,8 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DetailMenuController detailMenuController =
-        Get.put(DetailMenuController());
+    final CustomerMerchantMoreDetailMenuController detailMenuController =
+        Get.put(CustomerMerchantMoreDetailMenuController());
     final mediaQuery = MediaQuery.of(context);
     ProductModel product = detailMenuController.products[id];
 

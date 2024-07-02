@@ -139,6 +139,7 @@ class CustomerMenuItem extends StatelessWidget {
                                 estimate,
                                 style: greyTextStyle.copyWith(
                                     fontSize: 12, fontWeight: semiBold),
+                                    overflow: TextOverflow.ellipsis,
                               ),
                             ],
                           ),

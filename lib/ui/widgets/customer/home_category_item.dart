@@ -11,12 +11,12 @@ class HomeCategoryItemController extends GetxController {
 }
 
 class HomeCategoryItem extends StatelessWidget {
-  final String categoryName;
+  final String id;
   final String imageUrl;
   final String title;
 
   const HomeCategoryItem({
-    this.categoryName = 'Drink',
+    required this.id,
     required this.imageUrl,
     required this.title,
     super.key,
@@ -29,7 +29,7 @@ class HomeCategoryItem extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, '/customer-catagory',);
+        Navigator.pushNamed(context, '/customer-catagory', arguments: id);
       },
       child: Column(
         children: [
@@ -39,7 +39,7 @@ class HomeCategoryItem extends StatelessWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
-                image: AssetImage(imageUrl),
+                image: NetworkImage(imageUrl),
                 fit: BoxFit.cover,
               ),
             ),

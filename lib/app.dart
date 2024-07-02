@@ -75,7 +75,7 @@ class App extends StatelessWidget {
         ),
         GetPage(
           name: '/customer-home',
-          page: () => const CustomerHomePage(),
+          page: () => CustomerHomePage(),
           binding: CustomerBinding(),
         ),
         GetPage(

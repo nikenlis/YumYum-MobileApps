@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
-import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
+
 
 
 class CustomerMerchantItem extends StatelessWidget {
-  final int index;
+  final String id;
   final String name;
   final String imageUrl;
   final String description;
   final int isOpen;
 
   const CustomerMerchantItem({
-    required this.index,
+    required this.id,
     required this.name,
     required this.imageUrl,
     required this.description,
@@ -28,7 +28,8 @@ class CustomerMerchantItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, '/cutomer-merchant-detail',
-            arguments: index);
+            arguments: id);
+            // Get.offAndToNamed('/customer-merchant-detail', arguments: id);
       },
       child: Container(
           height: 110,

@@ -18,6 +18,7 @@ class HomeRecomendationItemController extends GetxController {
 }
 
 class HomeRecomendationItem extends StatelessWidget {
+  final String id;
   final String imageUrl;
   final String menu;
   final String merchant;
@@ -27,6 +28,7 @@ class HomeRecomendationItem extends StatelessWidget {
       Get.find<HomeRecomendationItemController>();
 
   HomeRecomendationItem({
+    required this.id,
     required this.menu,
     required this.merchant,
     required this.price,
@@ -41,7 +43,7 @@ class HomeRecomendationItem extends StatelessWidget {
       final itemWidth = controller.itemWidth.value;
       return GestureDetector(
         onTap: (){
-          Navigator.pushNamed(context, '/cutomer-merchant-detail');
+          Navigator.pushNamed(context, '/cutomer-merchant-detail', arguments: id);
         },
         child: Container(
           height: 200,
@@ -60,7 +62,7 @@ class HomeRecomendationItem extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(11),
                   image: DecorationImage(
-                    image: AssetImage(imageUrl),
+                    image: NetworkImage(imageUrl),
                     fit: BoxFit.cover,
                   ),
                 ),

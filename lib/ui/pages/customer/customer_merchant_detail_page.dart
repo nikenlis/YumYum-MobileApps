@@ -1,35 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yumyum_amicta/models/merchant_model/merchant_model.dart';
+import 'package:yumyum_amicta/controllers/pages/customer_controller/merchant_controller/merchant_detail_controller.dart';
 import 'package:yumyum_amicta/models/product_model/product_model.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_bottom_navigation_bar.dart';
-import 'package:yumyum_amicta/ui/pages/customer/customer_merchant_overview_page.dart';
 import 'package:yumyum_amicta/ui/widgets/badge.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_menu_item.dart';
-
-class MerchantDetailController extends GetxController {
-  var isOpen = DateTime.now().hour >= 9 && DateTime.now().hour <= 21;
-
-  var merchants = List<MerchantModel>.empty().obs;
-  var products = List<ProductModel>.empty().obs;
-  MerchantOverviewController merchantOverviewController = Get.find();
-
-  @override
-  void onInit() {
-    merchants.assignAll(merchantOverviewController.merchants);
-    products.assignAll(merchantOverviewController.products);
-    super.onInit();
-  }
-}
 
 class CutomerMerchantDetailPage extends StatelessWidget {
   const CutomerMerchantDetailPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final id = ModalRoute.of(context)?.settings.arguments as String;
+    Get.lazyPut<MerchantDetailController>(() => MerchantDetailController(id));
     return GetBuilder<MerchantDetailController>(
-      init: MerchantDetailController(),
+      init: MerchantDetailController(id),
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
@@ -67,12 +53,10 @@ class CutomerMerchantDetailPage extends StatelessWidget {
   Widget buildProfile(
       BuildContext context, MerchantDetailController controller) {
     return Obx(() {
-      var pageIndex = ModalRoute.of(context)?.settings.arguments as int;
-      if (pageIndex >= controller.merchants.length) {
-        return Container();
-      }
-      MerchantModel merchant = controller.merchants[pageIndex];
-
+      var merchant = controller.merchantData.value;
+    if (merchant.photo == null || merchant.name == null || merchant.description == null) {
+      return Container();
+    } else {
       return Container(
         margin: const EdgeInsets.only(top: 10),
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -81,7 +65,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(24),
               child: Image.network(
-                merchant.photo!,
+                merchant.photo!, // Gunakan default jika null
                 width: 100,
                 height: 100,
               ),
@@ -94,10 +78,10 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    merchant.username!,
+                    merchant.name!, // Gunakan default jika null
                     style: blackTextStyle.copyWith(
                       fontSize: 18,
-                      fontWeight: bold,
+                      fontWeight: FontWeight.bold,
                     ),
                     maxLines: null,
                     overflow: TextOverflow.visible,
@@ -106,10 +90,10 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                     height: 5,
                   ),
                   Text(
-                    merchant.description!,
+                    merchant.description!, // Gunakan default jika null
                     style: blackTextStyle.copyWith(
                       fontSize: 12,
-                      fontWeight: regular,
+                      fontWeight: FontWeight.normal,
                     ),
                     maxLines: null,
                     overflow: TextOverflow.visible,
@@ -121,9 +105,9 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                     merchant.isOpen == 1 ? 'Online' : 'Offline',
                     style: merchant.isOpen == 1
                         ? greenTextStyle.copyWith(
-                            fontSize: 12, fontWeight: bold)
+                            fontSize: 12, fontWeight: FontWeight.bold)
                         : yellowTextStyle.copyWith(
-                            fontSize: 12, fontWeight: bold),
+                            fontSize: 12, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -131,53 +115,54 @@ class CutomerMerchantDetailPage extends StatelessWidget {
           ],
         ),
       );
+    }
     });
   }
 
   Widget buildMenu(BuildContext context, MerchantDetailController controller) {
-  return ListView(
-    shrinkWrap: true,
-    physics: const ScrollPhysics(),
-    children: [
-      const SizedBox(
-        height: 30,
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 24),
-        child: Text(
-          'Pilihan menu untukmu',
-          style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
+    return ListView(
+      shrinkWrap: true,
+      physics: const ScrollPhysics(),
+      children: [
+        const SizedBox(
+          height: 30,
         ),
-      ),
-      const SizedBox(
-        height: 10,
-      ),
-      Obx(() {
-        return GridView.builder(
-          shrinkWrap: true,
-          physics: const ScrollPhysics(),
-          padding: const EdgeInsets.all(10.0),
-          itemCount: controller.products.length,
-          itemBuilder: (ctx, i) {
-            ProductModel product = controller.products[i];
-            return CustomerMenuItem(
-              id: i,
-              menu: product.name!,
-              description: product.description!,
-              price: product.price!,
-              estimate: product.estimate!,
-              imageUrl: product.image!,
-            );
-          },
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            childAspectRatio: 0.6,
-            crossAxisSpacing: 29,
-            mainAxisSpacing: 29,
+        Padding(
+          padding: const EdgeInsets.only(left: 24),
+          child: Text(
+            'Pilihan menu untukmu',
+            style: blackTextStyle.copyWith(fontSize: 16, fontWeight: semiBold),
           ),
-        );
-      })
-    ],
-  );
-}
+        ),
+        const SizedBox(
+          height: 10,
+        ),
+        Obx(() {
+          return GridView.builder(
+            shrinkWrap: true,
+            physics: const ScrollPhysics(),
+            padding: const EdgeInsets.all(10.0),
+            itemCount: controller.products.length,
+            itemBuilder: (ctx, i) {
+              ProductModel product = controller.products[i];
+              return CustomerMenuItem(
+                id: i,
+                menu: product.name!,
+                description: product.description!,
+                price: product.price!,
+                estimate: product.estimate!,
+                imageUrl: product.image!,
+              );
+            },
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 0.6,
+              crossAxisSpacing: 29,
+              mainAxisSpacing: 29,
+            ),
+          );
+        })
+      ],
+    );
+  }
 }

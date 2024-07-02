@@ -1,6 +1,3 @@
-import 'package:yumyum_amicta/models/category_model/category_model.dart';
-
-
 class ProductModel {
   String? name;
   String? price;
@@ -11,7 +8,6 @@ class ProductModel {
   String? encryptedId;
   String? encryptedCategoryId;
   String? encryptedMerchantId;
-  CategoryModel? categoryModel;
 
   ProductModel(
       {this.name,
@@ -22,8 +18,7 @@ class ProductModel {
       this.active,
       this.encryptedId,
       this.encryptedCategoryId,
-      this.encryptedMerchantId,
-      this.categoryModel});
+      this.encryptedMerchantId,});
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -35,25 +30,6 @@ class ProductModel {
     encryptedId = json['encrypted_id'];
     encryptedCategoryId = json['encrypted_category_id'];
     encryptedMerchantId = json['encrypted_merchant_id'];
-    categoryModel = json['category'] != null
-        ? CategoryModel.fromJson(json['category'])
-        : null;
   } //response
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['name'] = name;
-    data['price'] = price;
-    data['image'] = image;
-    data['description'] = description;
-    data['estimate'] = estimate;
-    data['active'] = active;
-    data['encrypted_id'] = encryptedId;
-    data['encrypted_category_id'] = encryptedCategoryId;
-    data['encrypted_merchant_id'] = encryptedMerchantId;
-    if (categoryModel != null) {
-      data['category'] = categoryModel!.toJson();
-    }
-    return data;
-  } //request
 }
