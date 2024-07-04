@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:yumyum_amicta/controllers/pages/customer_controller/merchant_controller/merchant_detail_controller.dart';
+import 'package:yumyum_amicta/controllers/pages/customer_controller/cart_controller/cart_controller.dart';
 import 'package:yumyum_amicta/controllers/pages/customer_controller/merchant_controller/customer_merchant_more_detail_menu_controller.dart';
 import 'package:yumyum_amicta/models/product_model/product_model.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
@@ -21,6 +21,8 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
         Get.put(CustomerMerchantMoreDetailMenuController());
     final mediaQuery = MediaQuery.of(context);
     ProductModel product = detailMenuController.products[id];
+     detailMenuController.merchantDetailController.initProduct(product, Get.find<CartController>());
+    
 
     return Obx(()=> AlertDialog(
       backgroundColor: Colors.transparent,
@@ -71,8 +73,11 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
                     children: [
                       Expanded(
                         child: CustomFilledButton(
-                          title: 'Tambah pesanan',
-                          onPressed: () {},
+                          title: 'Kurangi pesanan',
+                          onPressed: () {
+                            detailMenuController.merchantDetailController.setQuantity(false);
+                            detailMenuController.merchantDetailController.addItem(product);
+                          },
                         ),
                       ),
                       const SizedBox(width: 10),

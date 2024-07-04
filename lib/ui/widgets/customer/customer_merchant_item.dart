@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
-
-
 
 class CustomerMerchantItem extends StatelessWidget {
   final String id;

@@ -160,7 +160,8 @@ class CustomerOrderItem extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const CustomCircularIcon(
+                        CustomCircularIcon(
+                          onPressed: (){},
                           icon: Icons.remove,
                           size: 15,
                         ),
@@ -173,7 +174,8 @@ class CustomerOrderItem extends StatelessWidget {
                               ),
                             )),
                         const SizedBox(width: 12),
-                        const CustomCircularIcon(
+                       CustomCircularIcon(
+                          onPressed: (){},
                           icon: Icons.add,
                           size: 15,
                         ),

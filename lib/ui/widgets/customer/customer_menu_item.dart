@@ -1,10 +1,14 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/circular_icon.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_merchant_more_detail_menu.dart';
 
 class MenuItemController extends GetxController {
+
+
   var isActive = 1.obs;
   var isFavorite = false.obs;
 
@@ -26,17 +30,19 @@ class CustomerMenuItem extends StatelessWidget {
   final String estimate;
   final int initialIsActive;
   final bool initialIsFavorite;
+  final VoidCallback? onPressed;
 
   const CustomerMenuItem({
+    super.key,
     required this.id,
+    required this.imageUrl,
     required this.menu,
     required this.description,
     required this.price,
     required this.estimate,
-    required this.imageUrl,
     this.initialIsActive = 1,
     this.initialIsFavorite = false,
-    super.key,
+    this.onPressed,
   });
 
   @override
@@ -143,7 +149,7 @@ class CustomerMenuItem extends StatelessWidget {
                               ),
                             ],
                           ),
-                          const CustomCircularIcon(icon: Icons.add),
+                          CustomCircularIcon(icon: Icons.add, onPressed: onPressed,),
                         ],
                       )
                     : Center(

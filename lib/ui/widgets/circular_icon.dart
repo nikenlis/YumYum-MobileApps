@@ -13,9 +13,12 @@ class IconController extends GetxController {
 class CustomCircularIcon extends StatelessWidget {
   final IconData icon;
   final double size;
+    final VoidCallback? onPressed;
 
   const CustomCircularIcon({
+    
     required this.icon,
+      required this.onPressed,
     this.size = 20,
     super.key,
   });
@@ -35,9 +38,7 @@ class CustomCircularIcon extends StatelessWidget {
             shape: const CircleBorder(),
             clipBehavior: Clip.hardEdge,
             child: InkWell(
-              onTap: () {
-                iconController.toggleIcon();
-              },
+              onTap: onPressed,
               splashColor: greyColor,
               child: Container(
                 alignment: Alignment.center,

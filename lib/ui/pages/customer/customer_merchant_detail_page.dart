@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yumyum_amicta/controllers/pages/customer_controller/cart_controller/cart_controller.dart';
 import 'package:yumyum_amicta/controllers/pages/customer_controller/merchant_controller/merchant_detail_controller.dart';
 import 'package:yumyum_amicta/models/product_model/product_model.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
@@ -14,6 +15,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final id = ModalRoute.of(context)?.settings.arguments as String;
     Get.lazyPut<MerchantDetailController>(() => MerchantDetailController(id));
+
     return GetBuilder<MerchantDetailController>(
       init: MerchantDetailController(id),
       builder: (controller) {
@@ -21,7 +23,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
           appBar: AppBar(
             actions: [
               CustomBadge(
-                value: "0",
+                value: controller.totalItems(Get.find<CartController>()).toString(),
                 child: IconButton(
                   onPressed: () {
                     Get.offAll(() => const CustomerBottomNavBar(index: 2));
@@ -145,6 +147,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
             itemCount: controller.products.length,
             itemBuilder: (ctx, i) {
               ProductModel product = controller.products[i];
+              Get.find<MerchantDetailController>().initProduct(product, Get.find<CartController>());
               return CustomerMenuItem(
                 id: i,
                 menu: product.name!,
@@ -152,6 +155,10 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                 price: product.price!,
                 estimate: product.estimate!,
                 imageUrl: product.image!,
+                onPressed: (){
+                  controller.setQuantity(true);
+                  controller.addItem(product);
+                },
               );
             },
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
