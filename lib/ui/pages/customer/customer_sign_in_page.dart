@@ -13,7 +13,6 @@ class CustomerSignInPage extends StatelessWidget {
   final LoginViewModel _viewModel = Get.put(LoginViewModel());
 
   final studentNumberController = TextEditingController(text: '');
-
   final passwordController = TextEditingController(text: '');
 
   bool validate() {
@@ -32,11 +31,46 @@ class CustomerSignInPage extends StatelessWidget {
           horizontal: 24,
         ),
         children: [
-          SizedBox(
-            height: MediaQuery.of(context).size.height/4,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: 60,
+                height: 50,
+                margin: const EdgeInsets.only(
+                  top: 100,
+                  bottom: 100,
+                ),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      'assets/img_logo.png',
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              Container(
+                width: 155,
+                height: 50,
+                margin: const EdgeInsets.only(
+                  top: 100,
+                  bottom: 100,
+                ),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(
+                      'assets/img_logo_name.png',
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           Text(
-            'Login to Your\nAccount',
+            'Sign In to Your\nAccount',
             style: blackTextStyle.copyWith(
               fontSize: 20,
               fontWeight: semiBold,
@@ -56,7 +90,7 @@ class CustomerSignInPage extends StatelessWidget {
               children: [
                 // NOTE: EMAIL INPUT
                 CustomFormField(
-                  title: 'email',
+                  title: 'Student Number',
                   controller: studentNumberController,
                 ),
                 const SizedBox(
@@ -92,7 +126,7 @@ class CustomerSignInPage extends StatelessWidget {
             height: 50,
           ),
           CustomTextButton(
-            title: 'Belum memiliki akun',
+            title: 'Masuk sebagai merchant',
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
                   context, '/merchant-sign-in', (route) => false);

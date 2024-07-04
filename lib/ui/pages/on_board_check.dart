@@ -12,7 +12,12 @@ class OnBoardCheck extends StatelessWidget {
     AuthenticationManager authManager = Get.find();
     return Obx(() {
        print('BISAAA NGGGA NIHHHHHHH: ${authManager.isLogged.value}');
-      return authManager.isLogged.value ? CustomerBottomNavBar() : CustomerSignInPage();
+      // return authManager.isLogged.value ? CustomerBottomNavBar() : CustomerSignInPage();
+       if(authManager.isLogged.value) {
+        return const CustomerBottomNavBar();
+       } else {
+        return CustomerSignInPage();
+       }
     });
   }
 }
