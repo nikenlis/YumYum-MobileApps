@@ -60,16 +60,16 @@ class MerchantDetailController extends GetxController {
   void setQuantity(bool isIncrement) {
     if (isIncrement) {
       _quantity = checkQuantity(_quantity + 1);
-      print("INCREAMENT" + _quantity.toString());
+      print("INCREAMENT " + _quantity.toString());
+      print("CHARTITEMS " + _inCartItems.toString());
     } else {
       _quantity = checkQuantity(_quantity - 1);
-       print("DECREAMENT" + _quantity.toString());
+       print("DECREAMENT " + _quantity.toString());
     }
     update();
   }
 
-  int checkQuantity(int quantity, ) {
-
+  int checkQuantity(int quantity) {
     if ((_inCartItems + quantity) < 0) {
       Get.snackbar('Jumlah pesanan', 'Tidak bisa dikurangi lagi!',
           backgroundColor: purpleColor, colorText: whiteColor);
@@ -89,8 +89,6 @@ class MerchantDetailController extends GetxController {
     _cart = cart;
     var exist = false;
     exist = _cart.existInCart(product);
-    //if exits
-    //get from storage _inCartItems = 3
     if (exist) {
       _inCartItems = _cart.getQuantity(product);
     }

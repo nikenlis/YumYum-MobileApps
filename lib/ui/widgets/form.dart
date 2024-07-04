@@ -36,8 +36,7 @@ class CustomFormField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FormFieldController formFieldController =
-        Get.put(FormFieldController());
+    final FormFieldController formFieldController = Get.find<FormFieldController>();
     final mediaQuery = MediaQuery.of(context);
     final double screenWidth = mediaQuery.size.width;
     final double fieldWidth = screenWidth - 32;

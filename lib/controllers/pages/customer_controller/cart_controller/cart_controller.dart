@@ -25,9 +25,9 @@ class CartController extends GetxController {
           isExist: true,
         );
       });
-      if(totalQuantity <= 0){
-        _items.remove(product.encryptedId);
-      }
+      // if(totalQuantity <= 0){
+      //   _items.remove(product.encryptedId);
+      // }
     } else {
       if(quantity > 0){
         _items.putIfAbsent(product.encryptedId!, () {

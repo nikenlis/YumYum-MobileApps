@@ -6,32 +6,14 @@ import 'package:yumyum_amicta/ui/auth/login_view_model.dart';
 import 'package:yumyum_amicta/ui/widgets/bottons.dart';
 import 'package:yumyum_amicta/ui/widgets/form.dart';
 
-class CustomerSignInController extends GetxController {
-  final studentNumberController = TextEditingController(text: '');
-  final passwordController = TextEditingController(text: '');
-
-  bool validate() {
-    if (studentNumberController.text.isEmpty ||
-        passwordController.text.isEmpty) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  void dispose() {
-    studentNumberController.dispose();
-    passwordController.dispose();
-    super.dispose();
-  }
-}
 
 
 class CustomerSignInPage extends StatelessWidget {
   CustomerSignInPage({super.key});
-
   final LoginViewModel _viewModel = Get.put(LoginViewModel());
+
   final studentNumberController = TextEditingController(text: '');
+
   final passwordController = TextEditingController(text: '');
 
   bool validate() {
@@ -41,7 +23,6 @@ class CustomerSignInPage extends StatelessWidget {
     }
     return true;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -51,46 +32,11 @@ class CustomerSignInPage extends StatelessWidget {
           horizontal: 24,
         ),
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: 60,
-                height: 50,
-                margin: const EdgeInsets.only(
-                  top: 100,
-                  bottom: 100,
-                ),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      'assets/img_logo.png',
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              Container(
-                width: 155,
-                height: 50,
-                margin: const EdgeInsets.only(
-                  top: 100,
-                  bottom: 100,
-                ),
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage(
-                      'assets/img_logo_name.png',
-                    ),
-                  ),
-                ),
-              ),
-            ],
+          SizedBox(
+            height: MediaQuery.of(context).size.height/4,
           ),
           Text(
-            'Sign In to Your\nAccount',
+            'Login to Your\nAccount',
             style: blackTextStyle.copyWith(
               fontSize: 20,
               fontWeight: semiBold,
@@ -110,7 +56,7 @@ class CustomerSignInPage extends StatelessWidget {
               children: [
                 // NOTE: EMAIL INPUT
                 CustomFormField(
-                  title: 'Student Number',
+                  title: 'email',
                   controller: studentNumberController,
                 ),
                 const SizedBox(
@@ -146,7 +92,7 @@ class CustomerSignInPage extends StatelessWidget {
             height: 50,
           ),
           CustomTextButton(
-            title: 'Masuk sebagai merchant',
+            title: 'Belum memiliki akun',
             onPressed: () {
               Navigator.pushNamedAndRemoveUntil(
                   context, '/merchant-sign-in', (route) => false);

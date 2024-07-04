@@ -20,6 +20,6 @@ class CustomerBinding extends Bindings {
     Get.lazyPut<CustomerOrderSuccessController>(
         () => CustomerOrderSuccessController());
     Get.lazyPut<CustomerProfileController>(() => CustomerProfileController());
-    Get.lazyPut<CustomerSignInController>(() => CustomerSignInController());
+    //Get.lazyPut<CustomerSignInController>(() => CustomerSignInController());
   }
 }

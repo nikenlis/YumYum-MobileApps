@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/auth/core/auth_manager_controller.dart';
 import 'package:yumyum_amicta/ui/pages/on_board_check.dart';
-import 'package:yumyum_amicta/ui/pages/onboarding_page.dart';
+
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -27,16 +27,13 @@ class _SplashPageState extends State<SplashPage> {
       future: initializeSettings(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
+          print("dijalankan");
           return splashView();
         } else {
           if (snapshot.hasError) {
             return errorView(snapshot);
           } else {
-            if (_authManager.isLogged.value != null) {
-              return const OnBoardCheck(); // Halaman jika pengguna sudah login
-            } else {
-              return const OnboardingPage(); // Konten onboarding
-            }
+            return OnBoardCheck();
           }
         }
       },
