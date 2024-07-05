@@ -7,7 +7,6 @@ import 'package:yumyum_amicta/ui/pages/customer/customer_favorite_menu_page.dart
 import 'package:yumyum_amicta/ui/pages/customer/customer_order_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_order_success_page.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_profile_page.dart';
-import 'package:yumyum_amicta/ui/pages/customer/customer_sign_in_page.dart';
 
 class CustomerBinding extends Bindings {
   @override

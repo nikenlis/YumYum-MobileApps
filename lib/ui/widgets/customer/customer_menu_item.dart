@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yumyum_amicta/models/product_model/product_model.dart';
 
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/circular_icon.dart';
@@ -22,7 +23,7 @@ class MenuItemController extends GetxController {
 }
 
 class CustomerMenuItem extends StatelessWidget {
-  final int id;
+  final ProductModel product;
   final String imageUrl;
   final String menu;
   final String description;
@@ -34,7 +35,7 @@ class CustomerMenuItem extends StatelessWidget {
 
   const CustomerMenuItem({
     super.key,
-    required this.id,
+    required this.product,
     required this.imageUrl,
     required this.menu,
     required this.description,
@@ -59,7 +60,7 @@ class CustomerMenuItem extends StatelessWidget {
       onTap: () {
         showDialog(
             context: context,
-            builder: (context) => CustomerMerchantMoreDetailMenu(id: id));
+            builder: (context) => CustomerMerchantMoreDetailMenu(product: product));
       },
       child: Obx(() => Container(
             height: 300,

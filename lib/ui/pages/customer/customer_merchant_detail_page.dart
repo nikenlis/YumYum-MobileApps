@@ -149,7 +149,7 @@ class CutomerMerchantDetailPage extends StatelessWidget {
               ProductModel product = controller.products[i];
               Get.find<MerchantDetailController>().initProduct(product, Get.find<CartController>());
               return CustomerMenuItem(
-                id: i,
+                product: product,
                 menu: product.name!,
                 description: product.description!,
                 price: product.price!,

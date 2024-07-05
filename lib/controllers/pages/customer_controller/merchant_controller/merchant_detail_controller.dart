@@ -77,7 +77,7 @@ class MerchantDetailController extends GetxController {
     } else if ((_inCartItems + quantity) > 10) {
       Get.snackbar('Jumlah pesanan', 'Tidak bisa ditambah lagi!',
           backgroundColor: purpleColor, colorText: whiteColor);
-      return 10;
+      return 10 - _inCartItems;
     } else {
       return quantity;
     }
@@ -96,22 +96,24 @@ class MerchantDetailController extends GetxController {
   }
 
   void addItem(ProductModel product) {
-    // Log the current state before adding the item
+  // Log the current state before adding the item
   print("Before adding: _quantity=$_quantity, _inCartItems=$_inCartItems");
-      _cart.addItem(product, _quantity);
-      // _quantity =0;
-      _inCartItems = _cart.getQuantity(product);
+  _cart.addItem(product, _quantity);
 
-      // Log the current state after adding the item
+  // _quantity =0;
+  _inCartItems = _cart.getQuantity(product);
+
+
+  // Log the current state after adding the item
   print("After adding: _quantity=$_quantity, _inCartItems=$_inCartItems");
 
-
-      _cart.items.forEach((key, value) {
-        print("The id is " +
-            value.encryptedId! +
-            "the quantity is " +
-            value.quantity.toString());
+  _cart.items.forEach((key, value) {
+    print("The id is " +
+        value.encryptedId! +
+        "the quantity is " +
+        value.quantity.toString());
       });
+      
   }
 
   int totalItems(CartController cart){

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/controllers/pages/customer_controller/category_controller/category_detail_controller.dart';
+import 'package:yumyum_amicta/models/product_model/product_model.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/customer/customer_bottom_navigation_bar.dart';
 import 'package:yumyum_amicta/ui/widgets/badge.dart';
@@ -89,7 +90,7 @@ class CustomerCategoryPage extends StatelessWidget {
       itemBuilder: (ctx, i) {
         var product = controller.products[i];
         return CustomerMenuItem(
-        id: i,
+        product: ProductModel(),
         menu: product.name!,
         description: product.description!,
         price: product.price!,
