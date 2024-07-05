@@ -22,6 +22,7 @@ class LoginViewModel extends GetxController {
     if (response != null) {
       print('Login successful, token: ${response.token}');
       _authManager.login(response.token);
+      Get.offAllNamed('/customer-bottom-navbar');
     } else {
       /// Show user a dialog about the error response
       Get.defaultDialog(

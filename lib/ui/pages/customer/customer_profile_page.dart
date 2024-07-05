@@ -83,6 +83,7 @@ class CustomerProfilePage extends StatelessWidget {
             child: GestureDetector(
               onTap: () {
                 _authManager.logOut();
+                Get.offAllNamed('/customer-sign-in');
               },
               child: Text(
                 'Log out',

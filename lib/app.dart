@@ -58,6 +58,7 @@ class App extends StatelessWidget {
         GetPage(
           name: '/',
           page: () => const SplashPage(),
+          binding: CustomerBinding(),
         ),
         GetPage(
           name: '/onboarding',
