@@ -8,13 +8,16 @@ import 'package:yumyum_amicta/ui/widgets/customer/home_category_item.dart';
 import 'package:yumyum_amicta/ui/widgets/form.dart';
 import 'ui/widgets/customer/home_rekomendation_item.dart';
 
+import 'package:localstore/localstore.dart';
+
 void main() async {
-   await GetStorage.init();
+  await GetStorage.init();
   Get.put(HomeRecomendationItemController());
   Get.put(HomeCategoryItemController());
   Get.put(CartController());
   Get.put(FormFieldController());
   Get.put(AuthenticationManager());
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MainApp());
 }
 

@@ -22,6 +22,7 @@ dependencies:
   expansion_tile_group: ^1.2.4
   lite_rolling_switch: ^1.0.1
   get_storage: ^2.1.1
+  localstore: ^1.4.0
 
 dev_dependencies:
   flutter_test:

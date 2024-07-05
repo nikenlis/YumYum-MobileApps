@@ -75,10 +75,12 @@ class CustomerMerchantMoreDetailMenu extends StatelessWidget {
                             child: CustomFilledButton(
                               title: 'Kurangi pesanan',
                               onPressed: () {
-                                detailMenuController.merchantDetailController
-                                    .setQuantity(false);
-                                detailMenuController.merchantDetailController
-                                    .addItem(product);
+                                detailMenuController.cartController
+                                    .removeFromCart(product);
+                                // detailMenuController.merchantDetailController
+                                //     .setQuantity(false);
+                                // detailMenuController.merchantDetailController
+                                //     .addItem(product);
                               },
                             ),
                           ),

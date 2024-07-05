@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:yumyum_amicta/controllers/pages/customer_controller/cart_controller/cart_controller.dart';
 import 'package:yumyum_amicta/models/customer/cart_item.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/widgets/customer/customer_order_item.dart';
@@ -11,6 +12,8 @@ class CustomerOrderController extends GetxController {
   void calculateTotalPayment(List<int> prices) {
     totalPayment.value = prices.fold(0, (sum, price) => sum + price);
   }
+
+  CartController cartController = Get.find();
 }
 
 class CustomerOrderPage extends StatelessWidget {
@@ -20,10 +23,11 @@ class CustomerOrderPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final CustomerOrderController orderController =
         Get.put(CustomerOrderController());
+    orderController.cartController.getDataReadyCart();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Order'),
+        title: const Text('Orders'),
       ),
       body: GetBuilder<CustomerOrderController>(
         builder: (controller) {
@@ -75,7 +79,8 @@ class CustomerOrderPage extends StatelessWidget {
     );
   }
 
-  Widget buildTotalOrder(BuildContext context, CustomerOrderController controller) {
+  Widget buildTotalOrder(
+      BuildContext context, CustomerOrderController controller) {
     List<int> prices = [10000, 10000, 10000];
     controller.calculateTotalPayment(prices);
 
@@ -112,8 +117,10 @@ class CustomerOrderPage extends StatelessWidget {
   }
 
   Widget buildButton(BuildContext context, CustomerOrderController controller) {
+    CartController cartController = Get.find();
     return GestureDetector(
       onTap: () {
+        cartController.deleteAllCart();
         Navigator.pushNamedAndRemoveUntil(
             context, '/customer-order-success', (route) => false);
       },

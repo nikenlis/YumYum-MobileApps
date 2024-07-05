@@ -13,7 +13,7 @@ class MerchantDetailController extends GetxController {
   var loading = false.obs;
   late String merchantId;
   late CustomerMerchantService _customerMerchant;
-  late CartController _cart;
+  CartController cartController = Get.find();
 
   int _quantity = 0;
   int get quantity => _quantity;
@@ -64,7 +64,7 @@ class MerchantDetailController extends GetxController {
       print("CHARTITEMS " + _inCartItems.toString());
     } else {
       _quantity = checkQuantity(_quantity - 1);
-       print("DECREAMENT " + _quantity.toString());
+      print("DECREAMENT " + _quantity.toString());
     }
     update();
   }
@@ -86,37 +86,35 @@ class MerchantDetailController extends GetxController {
   void initProduct(ProductModel product, CartController cart) {
     _quantity = 0;
     _inCartItems = 0;
-    _cart = cart;
+    cartController = cart;
     var exist = false;
-    exist = _cart.existInCart(product);
+    exist = cartController.existInCart(product);
     if (exist) {
-      _inCartItems = _cart.getQuantity(product);
+      _inCartItems = cartController.getQuantity(product);
     }
-     //print("the id is " + product.encryptedId! + "quantity in the cart is $_inCartItems");
+    //print("the id is " + product.encryptedId! + "quantity in the cart is $_inCartItems");
   }
 
   void addItem(ProductModel product) {
-  // Log the current state before adding the item
-  print("Before adding: _quantity=$_quantity, _inCartItems=$_inCartItems");
-  _cart.addItem(product, _quantity);
+    // Log the current state before adding the item
+    print("Before adding: _quantity=$_quantity, _inCartItems=$_inCartItems");
+    cartController.addItem(product, _quantity);
 
-  // _quantity =0;
-  _inCartItems = _cart.getQuantity(product);
+    // _quantity =0;
+    _inCartItems = cartController.getQuantity(product);
 
+    // Log the current state after adding the item
+    print("After adding: _quantity=$_quantity, _inCartItems=$_inCartItems");
 
-  // Log the current state after adding the item
-  print("After adding: _quantity=$_quantity, _inCartItems=$_inCartItems");
-
-  _cart.items.forEach((key, value) {
-    print("The id is " +
-        value.encryptedId! +
-        "the quantity is " +
-        value.quantity.toString());
-      });
-      
+    cartController.items.forEach((key, value) {
+      print("The id is " +
+          value.encryptedId! +
+          "the quantity is " +
+          value.quantity.toString());
+    });
   }
 
-  int totalItems(CartController cart){
+  int totalItems(CartController cart) {
     return cart.totalItems;
   }
 }

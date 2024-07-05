@@ -23,7 +23,9 @@ class CutomerMerchantDetailPage extends StatelessWidget {
           appBar: AppBar(
             actions: [
               CustomBadge(
-                value: controller.totalItems(Get.find<CartController>()).toString(),
+                value: controller
+                    .totalItems(Get.find<CartController>())
+                    .toString(),
                 child: IconButton(
                   onPressed: () {
                     Get.offAll(() => const CustomerBottomNavBar(index: 2));
@@ -56,68 +58,70 @@ class CutomerMerchantDetailPage extends StatelessWidget {
       BuildContext context, MerchantDetailController controller) {
     return Obx(() {
       var merchant = controller.merchantData.value;
-    if (merchant.photo == null || merchant.name == null || merchant.description == null) {
-      return Container();
-    } else {
-      return Container(
-        margin: const EdgeInsets.only(top: 10),
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Row(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(24),
-              child: Image.network(
-                merchant.photo!, // Gunakan default jika null
-                width: 100,
-                height: 100,
+      if (merchant.photo == null ||
+          merchant.name == null ||
+          merchant.description == null) {
+        return Container();
+      } else {
+        return Container(
+          margin: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: Row(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: Image.network(
+                  merchant.photo!, // Gunakan default jika null
+                  width: 100,
+                  height: 100,
+                ),
               ),
-            ),
-            const SizedBox(
-              width: 15,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    merchant.name!, // Gunakan default jika null
-                    style: blackTextStyle.copyWith(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    maxLines: null,
-                    overflow: TextOverflow.visible,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    merchant.description!, // Gunakan default jika null
-                    style: blackTextStyle.copyWith(
-                      fontSize: 12,
-                      fontWeight: FontWeight.normal,
-                    ),
-                    maxLines: null,
-                    overflow: TextOverflow.visible,
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    merchant.isOpen == 1 ? 'Online' : 'Offline',
-                    style: merchant.isOpen == 1
-                        ? greenTextStyle.copyWith(
-                            fontSize: 12, fontWeight: FontWeight.bold)
-                        : yellowTextStyle.copyWith(
-                            fontSize: 12, fontWeight: FontWeight.bold),
-                  ),
-                ],
+              const SizedBox(
+                width: 15,
               ),
-            ),
-          ],
-        ),
-      );
-    }
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      merchant.name!, // Gunakan default jika null
+                      style: blackTextStyle.copyWith(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                    ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      merchant.description!, // Gunakan default jika null
+                      style: blackTextStyle.copyWith(
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      maxLines: null,
+                      overflow: TextOverflow.visible,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      merchant.isOpen == 1 ? 'Online' : 'Offline',
+                      style: merchant.isOpen == 1
+                          ? greenTextStyle.copyWith(
+                              fontSize: 12, fontWeight: FontWeight.bold)
+                          : yellowTextStyle.copyWith(
+                              fontSize: 12, fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      }
     });
   }
 
@@ -147,7 +151,8 @@ class CutomerMerchantDetailPage extends StatelessWidget {
             itemCount: controller.products.length,
             itemBuilder: (ctx, i) {
               ProductModel product = controller.products[i];
-              Get.find<MerchantDetailController>().initProduct(product, Get.find<CartController>());
+              Get.find<MerchantDetailController>()
+                  .initProduct(product, Get.find<CartController>());
               return CustomerMenuItem(
                 product: product,
                 menu: product.name!,
@@ -155,9 +160,10 @@ class CutomerMerchantDetailPage extends StatelessWidget {
                 price: product.price!,
                 estimate: product.estimate!,
                 imageUrl: product.image!,
-                onPressed: (){
-                  controller.setQuantity(true);
-                  controller.addItem(product);
+                onPressed: () {
+                  controller.cartController.addToCart(product);
+                  // controller.setQuantity(true);
+                  // controller.addItem(product);
                 },
               );
             },
