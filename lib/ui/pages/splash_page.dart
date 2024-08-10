@@ -111,7 +111,6 @@
 
 
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:yumyum_amicta/controllers/pages/splash/splash_page_controller.dart';
 

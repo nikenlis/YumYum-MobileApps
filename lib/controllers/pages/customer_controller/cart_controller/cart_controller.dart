@@ -92,18 +92,18 @@ class CartController extends GetxController {
     print(newData);
   }
 
-  void deleteAllCart() async {
-    final newData = await db.collection('cart').get();
+  // void deleteAllCart() async {
+  //   final newData = await db.collection('cart').get();
 
-    if (newData == null || newData.isEmpty) {
-      Get.snackbar('Information', 'Cart is empty!',
-          backgroundColor: purpleColor, colorText: whiteColor);
-    } else {
-      db.collection('cart').delete();
-    }
+  //   if (newData == null || newData.isEmpty) {
+  //     Get.snackbar('Information', 'Cart is empty!',
+  //         backgroundColor: purpleColor, colorText: whiteColor);
+  //   } else {
+  //     db.collection('cart').delete();
+  //   }
 
-    print(newData);
-  }
+  //   print(newData);
+  // }
 
   void getDataReadyCart() async {
     final newData = await db.collection('cart').get();
