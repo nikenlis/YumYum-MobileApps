@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_controller.dart';
+import 'package:carousel_slider/carousel_controller.dart' as carousel_slider;
 import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/merchant/merchant_orders_page.dart';
@@ -14,7 +14,7 @@ class MerchantBottomNavBar extends StatefulWidget {
 
 class _MerchantBottomNavBarState extends State<MerchantBottomNavBar> {
   int currentPageIndex = 0;
-  CarouselController controller = CarouselController();
+  carousel_slider.CarouselController controller = carousel_slider.CarouselController();
   final List<Widget> pages = [
     const MerchantOrdersPage(),
     MerchantStatusMenuPage(),

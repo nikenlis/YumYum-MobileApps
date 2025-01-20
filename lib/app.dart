@@ -48,7 +48,7 @@ class App extends StatelessWidget {
         ),
       ),
       themeMode: ThemeMode.system,
-      initialRoute: '/',
+      initialRoute: '/customer-sign-in',
       getPages: [
         GetPage(
           name: '/customer-profile',

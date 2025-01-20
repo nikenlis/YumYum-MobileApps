@@ -1,4 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
+
+import 'package:carousel_slider/carousel_slider.dart' as carousel_slider;
 import 'package:flutter/material.dart';
 import 'package:yumyum_amicta/shared/theme.dart';
 import 'package:yumyum_amicta/ui/pages/on_board_check.dart';
@@ -14,7 +15,7 @@ class OnboardingPage extends StatefulWidget {
 class _OnboardingPageState extends State<OnboardingPage> {
  
   int currentIndex = 0;
-  CarouselController controller = CarouselController();
+  carousel_slider.CarouselController controller = carousel_slider.CarouselController();
 
   List<String> titles = [
     'All your favorites',
@@ -36,7 +37,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CarouselSlider(
+            carousel_slider.CarouselSlider(
               items: [
                 Image.asset(
                   'assets/img_onboarding1.png',
@@ -51,7 +52,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   height: 331,
                 ),
               ],
-              options: CarouselOptions(
+              options: carousel_slider.CarouselOptions(
                 height: 331,
                 viewportFraction: 1, //biar satu gambar satu page
                 enableInfiniteScroll: false,
@@ -163,7 +164,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
                               title: 'Continue',
                               width: 150,
                               onPressed: () {
-                                controller.nextPage();
+                               controller.nextPage();
                               },
                             ),
                           ],
